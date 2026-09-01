@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: f8feb5008ee74414fb480512e27b7d18
+guid: b99fdb717bcea9f469e89befa90dbd86
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 4817761571909306170
-    second: Echo0101_0
+      213: 9047359717090397974
+    second: testLocket01_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -51,7 +51,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 48
+  spritePixelsToUnits: 32
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -139,13 +139,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Echo0101_0
+      name: testLocket01_0
       rect:
         serializedVersion: 2
-        x: 4
-        y: 0
-        width: 41
-        height: 38
+        x: 1
+        y: 1
+        width: 29
+        height: 13
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -154,8 +154,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: a378e22cf902cd240800000000000000
-      internalID: 4817761571909306170
+      spriteID: 61f0a5c4abdae8d70800000000000000
+      internalID: 9047359717090397974
       vertices: []
       indices: 
       edges: []
@@ -164,7 +164,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 5e97eb03825dee720800000000000000
+    spriteID: 
     internalID: 0
     vertices: []
     indices: 
@@ -174,7 +174,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Echo0101_0: 4817761571909306170
+      testLocket01_0: 9047359717090397974
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
