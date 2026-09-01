@@ -13,12 +13,15 @@ public class PlayerController : MonoBehaviour
     public bool isInvisible = false;
     private float coyoteTime = 0.5f;
     private float coyoteTimeCounter;
+    public bool isCrouch = false;
+    public float crouchSpeed = 2f;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Awake()
     {
         rb2d = transform.GetComponent<Rigidbody2D>();
         spriteRenderer = transform.GetComponent<SpriteRenderer>();
     }
+    
     void Start()
     {
         
@@ -26,20 +29,22 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-        if (rb2d.linearVelocity != Vector2.zero) {coyoteTimeCounter = 0;}
+        if (rb2d.linearVelocity.magnitude > crouchSpeed) {coyoteTimeCounter = 0;}
         else {coyoteTimeCounter+=Time.deltaTime;}
 
         horizontalInput = Input.GetAxisRaw("Horizontal");
         verticalInput = Input.GetAxisRaw("Vertical");
-        moveInput = new Vector2(horizontalInput, verticalInput).normalized;    
+        moveInput = new Vector2(horizontalInput, verticalInput).normalized; 
 
+        CrouchMovement();
         TurnInvisible();
+        
     }
 
     // Update is called once per frame
     void FixedUpdate()
     {
-       Movement();
+        Movement();
     }
 
     void Movement()
@@ -47,11 +52,28 @@ public class PlayerController : MonoBehaviour
 
         if (moveInput != Vector2.zero)
         {
+            if (!isCrouch)
             rb2d.linearVelocity = moveInput*moveSpeed;
+
+            else rb2d.linearVelocity = moveInput*crouchSpeed;
         }
         else {rb2d.linearVelocity = Vector2.zero;}
         
     }
+
+    void CrouchMovement()
+    {
+        if (Input.GetKeyDown(KeyCode.Space) && !isCrouch)
+        {
+            isCrouch = true;
+        }
+        
+        if (Input.GetKeyUp(KeyCode.Space) && isCrouch)
+        {
+            isCrouch = false;
+        }
+    }
+
 
     void TurnInvisible()
     {
@@ -61,7 +83,7 @@ public class PlayerController : MonoBehaviour
             StartCoroutine(SlowlyFadeInvisible(0.0075f, invDuration = 0.65f));
         }
 
-        if (rb2d.linearVelocity != Vector2.zero && isInvisible)
+        if (rb2d.linearVelocity.magnitude > crouchSpeed && isInvisible)
         {
             isInvisible = false;
             StartCoroutine(SlowlyReturn(1f, invDuration = 0.35f));
