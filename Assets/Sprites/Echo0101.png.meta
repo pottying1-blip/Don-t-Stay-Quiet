@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 3ff5ad343be883d49b1148a2a349b18b
+guid: f8feb5008ee74414fb480512e27b7d18
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 4207326855767465494
-    second: wrigglyBG01_0
+      213: 4817761571909306170
+    second: Echo0101_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -51,7 +51,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 100
+  spritePixelsToUnits: 48
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -139,13 +139,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: wrigglyBG01_0
+      name: Echo0101_0
       rect:
         serializedVersion: 2
-        x: 0
+        x: 4
         y: 0
-        width: 500
-        height: 500
+        width: 41
+        height: 38
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -154,8 +154,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 61e1bf3eb7d636a30800000000000000
-      internalID: 4207326855767465494
+      spriteID: a378e22cf902cd240800000000000000
+      internalID: 4817761571909306170
       vertices: []
       indices: 
       edges: []
@@ -174,7 +174,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      wrigglyBG01_0: 4207326855767465494
+      Echo0101_0: 4817761571909306170
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
