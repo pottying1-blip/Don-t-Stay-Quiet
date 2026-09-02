@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.Rendering;
 
 public class PlayerController : MonoBehaviour
 {
@@ -15,6 +16,11 @@ public class PlayerController : MonoBehaviour
     private float coyoteTimeCounter;
     public bool isCrouch = false;
     public float crouchSpeed = 2f;
+    private Vector2 mousePos;
+    private Vector2 worldMousePos;
+    private Vector2 playerCenter;
+    [SerializeField]private LayerMask interactableLayer;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Awake()
     {
@@ -35,10 +41,14 @@ public class PlayerController : MonoBehaviour
         horizontalInput = Input.GetAxisRaw("Horizontal");
         verticalInput = Input.GetAxisRaw("Vertical");
         moveInput = new Vector2(horizontalInput, verticalInput).normalized; 
+        
+        mousePos = Input.mousePosition;
+        worldMousePos = Camera.main.ScreenToWorldPoint(mousePos);
+        playerCenter = transform.position;
 
         CrouchMovement();
         TurnInvisible();
-        
+        CheckInteraction();
     }
 
     // Update is called once per frame
@@ -49,7 +59,6 @@ public class PlayerController : MonoBehaviour
 
     void Movement()
     {
-
         if (moveInput != Vector2.zero)
         {
             if (!isCrouch)
@@ -58,7 +67,24 @@ public class PlayerController : MonoBehaviour
             else rb2d.linearVelocity = moveInput*crouchSpeed;
         }
         else {rb2d.linearVelocity = Vector2.zero;}
-        
+    }
+
+    void CheckInteraction()
+    {
+        float pickUpDistance = 1f;
+        if (Physics2D.OverlapPoint(worldMousePos, interactableLayer) == true)
+        {
+            Debug.Log("Da tim thay");
+        }
+        /*
+        float trueDistance = Vector2.Distance(playerCenter, interactObj.transform.position);
+
+
+        if (interactObj.CompareTag("InteractableObject") && Input.GetKeyDown(KeyCode.Mouse0) 
+        && trueDistance < pickUpDistance)
+        {
+            Debug.Log($"Cham vao vat the {interactObj.name}");
+        }*/
     }
 
     void CrouchMovement()

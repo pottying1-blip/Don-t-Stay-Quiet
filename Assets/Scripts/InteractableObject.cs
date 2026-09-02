@@ -1,28 +1,26 @@
+using System.Numerics;
 using UnityEngine;
 
-public class ItemGeneral : MonoBehaviour, IInteractable 
+public class InteractableObject : MonoBehaviour, IInteractable 
 {
     private SpriteRenderer spriteRenderer;
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+
+    public bool isGrabable;
+    private Collider2D objCollider;
 
     void Awake()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
+        objCollider = GetComponent<Collider2D>();
     }
     void Start()
     {
         
     }
 
-    // Update is called once per frame
-    void Update()
+    public void Interaction()
     {
-        
-    }
 
-    void Interaction()
-    {
-        
     }
 
     void TurnOnOutline()
@@ -37,11 +35,13 @@ public class ItemGeneral : MonoBehaviour, IInteractable
 
     void OnMouseEnter()
     {
-        TurnOnOutline();
+        TurnOnOutline(); 
     }
 
     void OnMouseExit()
     {
         TurnOffOutline();
     }
+
+    
 }
