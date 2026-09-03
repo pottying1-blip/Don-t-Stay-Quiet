@@ -1,5 +1,7 @@
 using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.Rendering;
 
 public class PlayerController : MonoBehaviour
@@ -18,14 +20,16 @@ public class PlayerController : MonoBehaviour
     public float crouchSpeed = 2f;
     private Vector2 mousePos;
     private Vector2 worldMousePos;
-    private Vector2 playerCenter;
+    private Vector2 playerPosition;
     [SerializeField]private LayerMask interactableLayer;
-
+    private InteractableObject interactableObject;
+    private float throwAngle;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Awake()
     {
         rb2d = transform.GetComponent<Rigidbody2D>();
         spriteRenderer = transform.GetComponent<SpriteRenderer>();
+        
     }
     
     void Start()
@@ -44,7 +48,10 @@ public class PlayerController : MonoBehaviour
         
         mousePos = Input.mousePosition;
         worldMousePos = Camera.main.ScreenToWorldPoint(mousePos);
-        playerCenter = transform.position;
+
+        Vector2 mouseAndPlayerDistance = worldMousePos - playerPosition;
+        throwAngle = Mathf.Atan2(mouseAndPlayerDistance.y, mouseAndPlayerDistance.x)*Mathf.Rad2Deg;
+        playerPosition = transform.position;
 
         CrouchMovement();
         TurnInvisible();
@@ -71,20 +78,29 @@ public class PlayerController : MonoBehaviour
 
     void CheckInteraction()
     {
-        float pickUpDistance = 1f;
-        if (Physics2D.OverlapPoint(worldMousePos, interactableLayer) == true)
+        float pickUpDistance = 2f;
+        Collider2D interactObj = Physics2D.OverlapPoint(worldMousePos, interactableLayer);
+
+        if (interactableObject != null)
         {
-            Debug.Log("Da tim thay");
+            interactableObject.FollowPlayer(playerPosition, Quaternion.Euler(0f, 0f, throwAngle));
+            if (Input.GetKeyDown(KeyCode.Mouse0)&& interactableObject.isHeld)
+            {
+                interactableObject.Throw();
+                interactableObject = null;
+            }
+            return;
         }
-        /*
-        float trueDistance = Vector2.Distance(playerCenter, interactObj.transform.position);
 
-
-        if (interactObj.CompareTag("InteractableObject") && Input.GetKeyDown(KeyCode.Mouse0) 
-        && trueDistance < pickUpDistance)
+        if (interactObj != null)
         {
-            Debug.Log($"Cham vao vat the {interactObj.name}");
-        }*/
+            float trueDistance = Vector2.Distance(playerPosition, interactObj.transform.position);
+            if (trueDistance < pickUpDistance && Input.GetKeyDown(KeyCode.Mouse0))
+            {
+                interactableObject = interactObj.GetComponent<InteractableObject>();
+                interactableObject.Pickup();
+            }
+        }
     }
 
     void CrouchMovement()
