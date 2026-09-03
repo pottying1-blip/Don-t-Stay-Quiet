@@ -1,3 +1,5 @@
+using System;
+using System.Collections;
 using System.Numerics;
 using Unity.Android.Gradle.Manifest;
 using UnityEngine;
@@ -12,6 +14,7 @@ public class InteractableObject : MonoBehaviour, IInteractable
     public bool isHeld;
     private Rigidbody2D rb2d;
     public float throwForce = 5f;
+    
     void Awake()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
@@ -50,6 +53,22 @@ public class InteractableObject : MonoBehaviour, IInteractable
     public void Pickup()
     {
         isHeld = true;
+    }
+
+    void OnCollisionEnter2D(Collision2D collision)
+    {
+        BreakableObject breakableObject = GetComponent<BreakableObject>();
+        if (breakableObject != null)
+        {
+            breakableObject.Broken();
+            StartCoroutine(DestroyAfterHit());
+        }
+    }
+
+    IEnumerator DestroyAfterHit()
+    {
+        yield return new WaitForSecondsRealtime(3.5f);
+        Destroy(gameObject);
     }
 
     void TurnOnOutline()
