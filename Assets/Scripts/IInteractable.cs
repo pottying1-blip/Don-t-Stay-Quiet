@@ -2,5 +2,6 @@ using UnityEngine;
 
 public interface IInteractable 
 {
-    public void Interaction(){}
+    
+    public void Interaction(Vector2 playerPos);
 }
