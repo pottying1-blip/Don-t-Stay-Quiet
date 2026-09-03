@@ -67,6 +67,7 @@ public class InteractableObject : MonoBehaviour, IInteractable
 
     IEnumerator DestroyAfterHit()
     {
+        rb2d.linearVelocity = UnityEngine.Vector2.zero;
         yield return new WaitForSecondsRealtime(3.5f);
         Destroy(gameObject);
     }
