@@ -1,13 +1,10 @@
 using UnityEngine;
 
-public class HumanScareState : HumanBaseState
+public class HumanDeadState : HumanBaseState
 {
     public override void EnterState(HumanStateManager humanState)
     {
-        Debug.Log("He is scared!");
-        humanState.humanSoundSource.PlayOneShot(humanState.gaspSound);
-        humanState.animator.SetBool("isScared", true);
-        humanState.isMakingNoises = true;
+        
     }
 
     public override void UpdateState(HumanStateManager humanState)
@@ -19,5 +16,4 @@ public class HumanScareState : HumanBaseState
     {
         
     }
-
 }
