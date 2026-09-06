@@ -4,6 +4,9 @@ public class HumanDeadState : HumanBaseState
 {
     public override void EnterState(HumanStateManager humanState)
     {
+        humanState.humanSoundSource.PlayOneShot(humanState.fleshSound);
+        humanState.animator.SetBool("isScared", false);
+        humanState.animator.SetBool("isDead", true);
         
     }
 

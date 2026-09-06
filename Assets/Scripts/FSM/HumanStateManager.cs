@@ -16,13 +16,16 @@ public class HumanStateManager : MonoBehaviour
     public AudioSource humanSoundSource;
     public AudioClip gaspSound;
     public AudioClip walkingSound;
+    public AudioClip fleshSound;
     public Animator animator;
     public bool isDead;
     public bool isMakingNoises = false;
+
     void Start()
     {
         humanCurrentState = humanPatrolState;
         humanCurrentState.EnterState(this);
+        
     }
 
     void Update()
