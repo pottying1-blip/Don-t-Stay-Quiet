@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Linq;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -22,8 +23,11 @@ public class PlayerController : MonoBehaviour
     private Vector2 worldMousePos;
     private Vector2 playerPosition;
     [SerializeField]private LayerMask interactableLayer;
+    [SerializeField]private LayerMask npcLayer;
     private InteractableObject interactableObject;
     private float throwAngle;
+    public HumanStateManager humanStateManager;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Awake()
     {
@@ -56,6 +60,7 @@ public class PlayerController : MonoBehaviour
         CrouchMovement();
         TurnInvisible();
         CheckInteraction();
+        CheckNearNPC();
     }
 
     // Update is called once per frame
@@ -99,6 +104,24 @@ public class PlayerController : MonoBehaviour
             {
                 interactableObject = interactObj.GetComponent<InteractableObject>();
                 interactableObject.Pickup();
+            }
+        }
+    }
+
+    void CheckNearNPC()
+    {
+        float pierceDistance = 3f;
+        Collider2D[] livingThings = Physics2D.OverlapCircleAll(playerPosition, pierceDistance, npcLayer);
+        if (livingThings.Length > 0)
+        {
+            foreach (Collider2D thing in livingThings)
+            {
+                humanStateManager = thing.GetComponent<HumanStateManager>();
+            }
+
+            if (humanStateManager != null)
+            {
+                Debug.Log("Da tim thay NPC");
             }
         }
     }

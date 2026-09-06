@@ -7,6 +7,7 @@ public class HumanStateManager : MonoBehaviour
     public HumanPatrolState humanPatrolState = new HumanPatrolState();
     public HumanInvestState humanInvestState = new HumanInvestState();
     public HumanScareState humanScareState = new HumanScareState();
+    public HumanDeadState humanDeadState = new HumanDeadState();
     public UnityEngine.Vector2 posA = new UnityEngine.Vector2(2.5f, 2f);
     public UnityEngine.Vector2 posB = new UnityEngine.Vector2(2.5f, -1f);
     public float patrolSpeed = 0.1f;
@@ -15,6 +16,9 @@ public class HumanStateManager : MonoBehaviour
     public AudioSource humanSoundSource;
     public AudioClip gaspSound;
     public AudioClip walkingSound;
+    public Animator animator;
+    public bool isDead;
+    public bool isMakingNoises = false;
     void Start()
     {
         humanCurrentState = humanPatrolState;
@@ -30,5 +34,12 @@ public class HumanStateManager : MonoBehaviour
     {
         humanCurrentState = state;
         state.EnterState(this);
+    }
+
+    public void Die()
+    {
+        if (isDead) return;
+        isDead = true;
+        SwitchState(humanDeadState);
     }
 }

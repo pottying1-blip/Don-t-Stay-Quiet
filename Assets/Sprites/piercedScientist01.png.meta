@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 7ea0934f80002384bbb20d64f813e2c5
+guid: 84e572b99f513204cb8b3377befb1fb9
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -7240741125478353384
-    second: testHologramtable01_0
+      213: 8025251911029754528
+    second: piercedScientist01_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -139,13 +139,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: testHologramtable01_0
+      name: piercedScientist01_0
       rect:
         serializedVersion: 2
-        x: 4
-        y: 3
-        width: 40
-        height: 24
+        x: 11
+        y: 4
+        width: 25
+        height: 40
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -154,8 +154,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 816fc493f48b38b90800000000000000
-      internalID: -7240741125478353384
+      spriteID: 0aa04fde71c6f5f60800000000000000
+      internalID: 8025251911029754528
       vertices: []
       indices: 
       edges: []
@@ -174,7 +174,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      testHologramtable01_0: -7240741125478353384
+      piercedScientist01_0: 8025251911029754528
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
