@@ -119,9 +119,14 @@ public class PlayerController : MonoBehaviour
                 humanStateManager = thing.GetComponent<HumanStateManager>();
             }
 
-            if (humanStateManager != null)
+            if (humanStateManager != null )
             {
-                Debug.Log("Da tim thay NPC");
+                if (humanStateManager.isMakingNoises && Input.GetKeyDown(KeyCode.Mouse0) && !humanStateManager.isDead)
+                {
+                    Vector2 humanPos = humanStateManager.transform.position;
+                    transform.position = humanPos + new Vector2(1f, humanPos.y);
+                    humanStateManager.Die();
+                }
             }
         }
     }
