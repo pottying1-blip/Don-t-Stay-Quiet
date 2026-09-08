@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Numerics;
 using UnityEngine;
 
@@ -23,6 +24,21 @@ public class HumanPatrolState : HumanBaseState
             float pingPongValue = Mathf.PingPong(Time.time*humanState.patrolSpeed, 1f);
             humanState.transform.position = UnityEngine.Vector2.Lerp(humanState.posA, humanState.posB, pingPongValue);
             
+        }
+
+        Collider2D[] surrounds = Physics2D.OverlapCircleAll(humanState.transform.position, humanState.awarenessRadius);
+        foreach (Collider2D obj in surrounds)
+        {
+            
+            if (obj.TryGetComponent<InteractableObject>(out var interactableObject))
+            {
+                if (interactableObject.IsMakingNoise())
+                {
+                    humanState.SwitchState(humanState.humanInvestState);
+                    humanState.investPos = interactableObject.transform.position;
+                    break;
+                }
+            }
         }
     }
 
