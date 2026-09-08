@@ -14,6 +14,7 @@ public class InteractableObject : MonoBehaviour, IInteractable
     public bool isHeld;
     private Rigidbody2D rb2d;
     public float throwForce = 5f;
+    private BreakableObject breakableObject;
     
     void Awake()
     {
@@ -57,12 +58,18 @@ public class InteractableObject : MonoBehaviour, IInteractable
 
     void OnCollisionEnter2D(Collision2D collision)
     {
-        BreakableObject breakableObject = GetComponent<BreakableObject>();
+        breakableObject = GetComponent<BreakableObject>();
         if (breakableObject != null)
         {
             breakableObject.Broken();
             StartCoroutine(DestroyAfterHit());
         }
+    }
+
+    public bool IsMakingNoise()
+    {
+        return breakableObject != null && breakableObject.isMakeNoise;
+       
     }
 
     IEnumerator DestroyAfterHit()

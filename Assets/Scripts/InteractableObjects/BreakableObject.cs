@@ -1,3 +1,5 @@
+using System.Collections;
+using NUnit.Framework;
 using UnityEngine;
 
 public class BreakableObject : MonoBehaviour
@@ -5,6 +7,7 @@ public class BreakableObject : MonoBehaviour
     public Animator _brokenBottles;
     public AudioSource brokenSource;
     public AudioClip brokenSound;
+    public bool isMakeNoise = false;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -20,6 +23,19 @@ public class BreakableObject : MonoBehaviour
     public void Broken()
     {
         _brokenBottles.SetBool("isBroken", true);
-        brokenSource.PlayOneShot(brokenSound);
+        isMakeNoise = true;
+        if (isMakeNoise)
+        {
+            brokenSource.PlayOneShot(brokenSound);
+            StartCoroutine(WaitNoNoise());
+        }
     }
+
+    IEnumerator WaitNoNoise()
+    {
+        yield return new WaitForSecondsRealtime(.5f);
+        isMakeNoise = false;
+    }
+
+
 }

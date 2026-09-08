@@ -20,7 +20,9 @@ public class HumanStateManager : MonoBehaviour
     public Animator animator;
     public bool isDead;
     public bool isMakingNoises = false;
-
+    public float awarenessRadius = 3f;
+    public Vector2 investPos;
+    
     void Start()
     {
         humanCurrentState = humanPatrolState;
