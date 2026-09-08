@@ -7,7 +7,7 @@ public class HumanDeadState : HumanBaseState
         humanState.humanSoundSource.PlayOneShot(humanState.fleshSound);
         humanState.animator.SetBool("isScared", false);
         humanState.animator.SetBool("isDead", true);
-        
+        humanState.isDead = true;
     }
 
     public override void UpdateState(HumanStateManager humanState)
