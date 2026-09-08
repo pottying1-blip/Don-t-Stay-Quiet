@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Linq;
 using Unity.VisualScripting;
@@ -24,10 +25,12 @@ public class PlayerController : MonoBehaviour
     private Vector2 playerPosition;
     [SerializeField]private LayerMask interactableLayer;
     [SerializeField]private LayerMask npcLayer;
+    [SerializeField]private GameObject consumeGuidanceCanvas;
+    public bool hasShownConsumeGuidance = false;
     private InteractableObject interactableObject;
     private float throwAngle;
     public HumanStateManager humanStateManager;
-
+    private float pierceDistance = 3f;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Awake()
     {
@@ -60,7 +63,7 @@ public class PlayerController : MonoBehaviour
         CrouchMovement();
         TurnInvisible();
         CheckInteraction();
-        CheckNearNPC();
+        KillNPC();
     }
 
     // Update is called once per frame
@@ -108,27 +111,83 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    void CheckNearNPC()
+    void KillNPC()
     {
-        float pierceDistance = 3f;
         Collider2D[] livingThings = Physics2D.OverlapCircleAll(playerPosition, pierceDistance, npcLayer);
+
         if (livingThings.Length > 0)
         {
-            foreach (Collider2D thing in livingThings)
-            {
-                humanStateManager = thing.GetComponent<HumanStateManager>();
-            }
+            HumanStateManager target = FindClosestTarget(livingThings);
+            Collider2D targetCollider = target.GetComponent<Collider2D>();
 
-            if (humanStateManager != null )
+            if (target != null)
             {
-                if (humanStateManager.isMakingNoises && Input.GetKeyDown(KeyCode.Mouse0) && !humanStateManager.isDead)
+                float distance = Vector2.Distance(playerPosition, target.transform.position);
+                HandleKillInput(target, distance, targetCollider);
+                HandleConsumeGuidance(target, distance);
+            }
+        }
+        HandleConsumeInput();
+    }
+
+    void HandleKillInput(HumanStateManager target, float distance, Collider2D targetCollider)
+    {
+        if (target.isMakingNoises && Input.GetKeyDown(KeyCode.Mouse0) && !target.isDead && distance < pierceDistance)
+        {
+            Vector2 humanPos = target.transform.position;
+            transform.position = humanPos + new Vector2(1f, 0f);
+            target.Die();
+            targetCollider.enabled = false;
+            humanStateManager = target; 
+        }
+    }
+
+    void HandleConsumeGuidance(HumanStateManager target, float distance)
+    {
+        if (!consumeGuidanceCanvas.activeSelf && target.isDead && distance < pierceDistance)
+        {
+            consumeGuidanceCanvas.SetActive(true);
+            hasShownConsumeGuidance = true;
+
+            if (hasShownConsumeGuidance && distance > pierceDistance)
+            {
+                consumeGuidanceCanvas.SetActive(false);
+                hasShownConsumeGuidance = true;
+            }
+        }
+
+        
+    }
+
+    void HandleConsumeInput()
+    {
+        if (Input.GetKeyDown(KeyCode.Q) && hasShownConsumeGuidance && humanStateManager != null)
+        {
+            Debug.Log("Echoe has evolved a little bit!");
+            Destroy(humanStateManager.gameObject);
+            consumeGuidanceCanvas.SetActive(false);
+            humanStateManager = null; 
+        }
+    }
+
+    HumanStateManager FindClosestTarget(Collider2D[] candidates)
+    {
+        HumanStateManager closest = null;
+        float closestDist = float.MaxValue;
+
+        foreach (Collider2D thing in candidates)
+        {
+            if (thing.TryGetComponent<HumanStateManager>(out var hsm))
+            {
+                float d = Vector2.Distance(playerPosition, hsm.transform.position);
+                if (d < closestDist)
                 {
-                    Vector2 humanPos = humanStateManager.transform.position;
-                    transform.position = humanPos + new Vector2(1f, humanPos.y);
-                    humanStateManager.Die();
+                    closestDist = d;
+                    closest = hsm;
                 }
             }
         }
+        return closest;
     }
 
     void CrouchMovement()
