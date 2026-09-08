@@ -125,6 +125,7 @@ public class PlayerController : MonoBehaviour
                 float distance = Vector2.Distance(playerPosition, target.transform.position);
                 HandleKillInput(target, distance, targetCollider);
                 HandleConsumeGuidance(target, distance);
+                Debug.Log(distance);
             }
         }
         HandleConsumeInput();
@@ -137,7 +138,7 @@ public class PlayerController : MonoBehaviour
             Vector2 humanPos = target.transform.position;
             transform.position = humanPos + new Vector2(1f, 0f);
             target.Die();
-            targetCollider.enabled = false;
+            targetCollider.isTrigger = true;
             humanStateManager = target; 
         }
     }
@@ -148,25 +149,25 @@ public class PlayerController : MonoBehaviour
         {
             consumeGuidanceCanvas.SetActive(true);
             hasShownConsumeGuidance = true;
-
-            if (hasShownConsumeGuidance && distance > pierceDistance)
-            {
-                consumeGuidanceCanvas.SetActive(false);
-                hasShownConsumeGuidance = true;
-            }
         }
 
-        
+        if (hasShownConsumeGuidance && distance > pierceDistance)
+        {
+            consumeGuidanceCanvas.SetActive(false);
+            hasShownConsumeGuidance = false;
+        }
     }
 
     void HandleConsumeInput()
     {
+        Vector2 growSize = new Vector2(0.2f, 0.2f);
         if (Input.GetKeyDown(KeyCode.Q) && hasShownConsumeGuidance && humanStateManager != null)
         {
             Debug.Log("Echoe has evolved a little bit!");
             Destroy(humanStateManager.gameObject);
             consumeGuidanceCanvas.SetActive(false);
             humanStateManager = null; 
+            transform.localScale = (Vector2)transform.localScale + growSize;
         }
     }
 
