@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Linq;
+using Unity.Jobs;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -31,6 +32,11 @@ public class PlayerController : MonoBehaviour
     private float throwAngle;
     public HumanStateManager humanStateManager;
     private float pierceDistance = 3f;
+    private float timerQPress = 2.0f;
+    private float holdTime = 0f;
+    public AudioSource playerSoundSource;
+    public AudioClip eatingSound;
+    public AudioClip possessSound;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Awake()
     {
@@ -125,7 +131,6 @@ public class PlayerController : MonoBehaviour
                 float distance = Vector2.Distance(playerPosition, target.transform.position);
                 HandleKillInput(target, distance, targetCollider);
                 HandleConsumeGuidance(target, distance);
-                Debug.Log(distance);
             }
         }
         HandleConsumeInput();
@@ -161,14 +166,30 @@ public class PlayerController : MonoBehaviour
     void HandleConsumeInput()
     {
         Vector2 growSize = new Vector2(0.2f, 0.2f);
-        if (Input.GetKeyDown(KeyCode.Q) && hasShownConsumeGuidance && humanStateManager != null)
+        if (Input.GetKey(KeyCode.Q) && hasShownConsumeGuidance && humanStateManager != null)
         {
-            Debug.Log("Echoe has evolved a little bit!");
+            holdTime+= Time.deltaTime;
+            if (holdTime >= timerQPress)
+            {
+                holdTime = 0f;
+                playerSoundSource.PlayOneShot(possessSound);
+                transform.position = humanStateManager.transform.position;
+                Destroy(humanStateManager.gameObject);
+                consumeGuidanceCanvas.SetActive(false);
+                humanStateManager = null; 
+            }
+        }
+
+        if (Input.GetKeyUp(KeyCode.Q) && hasShownConsumeGuidance && humanStateManager != null && holdTime < timerQPress)
+        {
+            holdTime = 0f;
+            playerSoundSource.PlayOneShot(eatingSound);
             Destroy(humanStateManager.gameObject);
             consumeGuidanceCanvas.SetActive(false);
             humanStateManager = null; 
             transform.localScale = (Vector2)transform.localScale + growSize;
         }
+           
     }
 
     HumanStateManager FindClosestTarget(Collider2D[] candidates)
