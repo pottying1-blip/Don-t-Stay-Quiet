@@ -32,11 +32,13 @@ public class PlayerController : MonoBehaviour
     private float throwAngle;
     public HumanStateManager humanStateManager;
     private float pierceDistance = 3f;
-    private float timerQPress = 2.0f;
+    private float timerQPress = 1.25f;
     private float holdTime = 0f;
     public AudioSource playerSoundSource;
     public AudioClip eatingSound;
     public AudioClip possessSound;
+    private Sprite targetSprite;
+    private bool actionTrigerred = false;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Awake()
     {
@@ -125,7 +127,7 @@ public class PlayerController : MonoBehaviour
         {
             HumanStateManager target = FindClosestTarget(livingThings);
             Collider2D targetCollider = target.GetComponent<Collider2D>();
-
+            
             if (target != null)
             {
                 float distance = Vector2.Distance(playerPosition, target.transform.position);
@@ -142,6 +144,7 @@ public class PlayerController : MonoBehaviour
         {
             Vector2 humanPos = target.transform.position;
             transform.position = humanPos + new Vector2(1f, 0f);
+            targetSprite = target.GetComponent<SpriteRenderer>().sprite;
             target.Die();
             targetCollider.isTrigger = true;
             humanStateManager = target; 
@@ -169,27 +172,38 @@ public class PlayerController : MonoBehaviour
         if (Input.GetKey(KeyCode.Q) && hasShownConsumeGuidance && humanStateManager != null)
         {
             holdTime+= Time.deltaTime;
-            if (holdTime >= timerQPress)
+            if (holdTime >= timerQPress && !actionTrigerred)
             {
-                holdTime = 0f;
+                actionTrigerred = true;
                 playerSoundSource.PlayOneShot(possessSound);
+                transform.position = humanStateManager.transform.position;
+                spriteRenderer.sprite = targetSprite;
+                StartCoroutine(WaitForDelete());
+            }
+        }
+
+        if (Input.GetKeyUp(KeyCode.Q))
+        {
+            if (!actionTrigerred && hasShownConsumeGuidance && humanStateManager != null && holdTime < timerQPress)
+            {
+                playerSoundSource.PlayOneShot(eatingSound);
+                transform.localScale = (Vector2)transform.localScale + growSize;
                 transform.position = humanStateManager.transform.position;
                 Destroy(humanStateManager.gameObject);
                 consumeGuidanceCanvas.SetActive(false);
                 humanStateManager = null; 
             }
+        holdTime = 0f;
+        actionTrigerred = false;
         }
+        
+    }
 
-        if (Input.GetKeyUp(KeyCode.Q) && hasShownConsumeGuidance && humanStateManager != null && holdTime < timerQPress)
-        {
-            holdTime = 0f;
-            playerSoundSource.PlayOneShot(eatingSound);
-            Destroy(humanStateManager.gameObject);
-            consumeGuidanceCanvas.SetActive(false);
-            humanStateManager = null; 
-            transform.localScale = (Vector2)transform.localScale + growSize;
-        }
-           
+    IEnumerator WaitForDelete(){
+        yield return new WaitForSecondsRealtime(1.0f);
+        Destroy(humanStateManager.gameObject);
+        consumeGuidanceCanvas.SetActive(false);
+        humanStateManager = null; 
     }
 
     HumanStateManager FindClosestTarget(Collider2D[] candidates)
