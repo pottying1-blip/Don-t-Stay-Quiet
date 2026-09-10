@@ -15,7 +15,7 @@ public class CameraMovement : MonoBehaviour
         
     }
 
-    void FixedUpdate()
+    void LateUpdate()
     {
         Vector3 newPos = player.position;
         newPos.z = transform.position.z;
