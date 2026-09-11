@@ -15,15 +15,15 @@ public class HumanPatrolState : HumanBaseState
         float distance = UnityEngine.Vector2.Distance(humanState.transform.position, 
         humanState.playerController.transform.position);
 
-        if (humanState.playerController.isInvisible == false && distance < humanState.scareDistance)
+        if (humanState.playerController.isInvisible == false && distance < humanState.scareDistance
+         && humanState.playerController.currentState!=humanState.playerController.disguisedState)
         {
             humanState.SwitchState(humanState.humanScareState);
-
-        } else 
+        }
+        else 
         {
             float pingPongValue = Mathf.PingPong(Time.time*humanState.patrolSpeed, 1f);
             humanState.transform.position = UnityEngine.Vector2.Lerp(humanState.posA, humanState.posB, pingPongValue);
-            
         }
 
         Collider2D[] surrounds = Physics2D.OverlapCircleAll(humanState.transform.position, humanState.awarenessRadius);

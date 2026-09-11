@@ -9,6 +9,9 @@ using UnityEngine.Rendering;
 
 public class PlayerController : MonoBehaviour
 {
+    public PlayerBaseState currentState;
+    public PlayerNormalState normalState = new PlayerNormalState();
+    public PlayerDisguiseState disguisedState = new PlayerDisguiseState();
     private float horizontalInput;
     private float verticalInput;
     private Rigidbody2D rb2d;
@@ -39,7 +42,8 @@ public class PlayerController : MonoBehaviour
     public AudioClip possessSound;
     private Sprite targetSprite;
     private bool actionTrigerred = false;
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    public bool isPossessed = false;
+
     void Awake()
     {
         rb2d = transform.GetComponent<Rigidbody2D>();
@@ -49,11 +53,12 @@ public class PlayerController : MonoBehaviour
     
     void Start()
     {
-        
+        currentState = normalState;
     }
 
     void Update()
     {
+        currentState.UpdateState(this);
         if (rb2d.linearVelocity.magnitude > crouchSpeed) {coyoteTimeCounter = 0;}
         else {coyoteTimeCounter+=Time.deltaTime;}
 
@@ -71,16 +76,21 @@ public class PlayerController : MonoBehaviour
         CrouchMovement();
         TurnInvisible();
         CheckInteraction();
-        KillNPC();
     }
 
     // Update is called once per frame
     void FixedUpdate()
     {
-        Movement();
+        MovementInput();
     }
 
-    void Movement()
+    public void SwitchState(PlayerBaseState newState)
+    {
+        currentState = newState;
+        newState.EnterState(this);
+    }
+
+    public void MovementInput()
     {
         if (moveInput != Vector2.zero)
         {
@@ -92,7 +102,7 @@ public class PlayerController : MonoBehaviour
         else {rb2d.linearVelocity = Vector2.zero;}
     }
 
-    void CheckInteraction()
+    public void CheckInteraction()
     {
         float pickUpDistance = 2f;
         Collider2D interactObj = Physics2D.OverlapPoint(worldMousePos, interactableLayer);
@@ -119,7 +129,7 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    void KillNPC()
+    public void KillNPC()
     {
         Collider2D[] livingThings = Physics2D.OverlapCircleAll(playerPosition, pierceDistance, npcLayer);
 
@@ -140,9 +150,9 @@ public class PlayerController : MonoBehaviour
 
     void HandleKillInput(HumanStateManager target, float distance, Collider2D targetCollider)
     {
+        Vector2 humanPos = target.transform.position;
         if (target.isMakingNoises && Input.GetKeyDown(KeyCode.Mouse0) && !target.isDead && distance < pierceDistance)
         {
-            Vector2 humanPos = target.transform.position;
             transform.position = humanPos + new Vector2(1f, 0f);
             targetSprite = target.GetComponent<SpriteRenderer>().sprite;
             target.Die();
@@ -176,6 +186,7 @@ public class PlayerController : MonoBehaviour
             {
                 actionTrigerred = true;
                 playerSoundSource.PlayOneShot(possessSound);
+                isPossessed = true;
                 transform.position = humanStateManager.transform.position;
                 spriteRenderer.sprite = targetSprite;
                 StartCoroutine(WaitForDelete());
