@@ -1,10 +1,13 @@
 fileFormatVersion: 2
-guid: 69fbd0f7c9a0a45498c06831dace9b09
+guid: 802d71b359b805844bd15b123463760e
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -7375545699213652275
-    second: doorBorder01_0
+      213: -1378817822564315928
+    second: doorBorderSide01_0
+  - first:
+      213: -331051192019446952
+    second: doorBorderSide01_1
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -56,7 +59,7 @@ TextureImporter:
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
   alphaIsTransparency: 1
-  spriteTessellationDetail: 0
+  spriteTessellationDetail: -1
   textureType: 8
   textureShape: 1
   singleChannelComponent: 0
@@ -139,42 +142,55 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: doorBorder01_0
+      name: doorBorderSide01_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 96
+        width: 25
         height: 80
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: dcec5bd834cc4a990800000000000000
-      internalID: -7375545699213652275
+      spriteID: 8ec8314ee747ddce0800000000000000
+      internalID: -1378817822564315928
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: doorBorderSide01_1
+      rect:
+        serializedVersion: 2
+        x: 71
+        y: 0
+        width: 25
+        height: 80
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8531631e1bed76bf0800000000000000
+      internalID: -331051192019446952
       vertices: []
       indices: 
       edges: []
       weights: []
     outline: []
     customData: 
-    physicsShape:
-    - - {x: 48, y: 40}
-      - {x: -48, y: 40}
-      - {x: -48, y: -40}
-      - {x: -24, y: -40}
-      - {x: -24, y: 24}
-      - {x: -1, y: 24}
-      - {x: 24, y: 24}
-      - {x: 24, y: -40}
-      - {x: 48, y: -40}
+    physicsShape: []
     bones: []
     spriteID: 5e97eb03825dee720800000000000000
-    internalID: 1537655665
+    internalID: 0
     vertices: []
     indices: 
     edges: []
@@ -183,7 +199,8 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      doorBorder01_0: -7375545699213652275
+      doorBorderSide01_0: -1378817822564315928
+      doorBorderSide01_1: -331051192019446952
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
