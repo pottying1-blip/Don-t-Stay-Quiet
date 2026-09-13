@@ -12,6 +12,11 @@ public class PlayerTerrorState : PlayerBaseState
         
     }
 
+    public override void PhysicsUpdate(PlayerController player)
+    {
+        throw new System.NotImplementedException();
+    }
+
     public override void OnCollisionEnter(PlayerController player)
     {
         

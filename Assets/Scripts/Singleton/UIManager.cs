@@ -18,6 +18,7 @@ public class UIManager : MonoBehaviour
     private DialogueEntry currentEntry;
     private HumanStateManager currentNPC;
     public GameObject talkingDialogueHolder;
+    public PlayerController playerController;
     void Awake()
     {
         mainCamera = Camera.main;
@@ -59,6 +60,7 @@ public class UIManager : MonoBehaviour
         currentNPC.suspicionLevel += choice.suspicionAmount;
         GameManager.Instance.globalAlertLevel += choice.alertAmount;
         talkingDialogueHolder.SetActive(false);
+        playerController.isTalking = false;
     }
     void MoveToPlayer()
     {

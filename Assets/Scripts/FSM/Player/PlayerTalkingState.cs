@@ -1,24 +1,25 @@
 using UnityEngine;
 
-public class PlayerDisguiseState : PlayerBaseState
+public class PlayerTalkingState : PlayerBaseState
 {
     public override void EnterState(PlayerController player)
     {
-        player.isPossessed = true;
+        Debug.Log("Has enter talking!");
+        player.rb2d.linearVelocity = Vector2.zero;
     }
 
     public override void UpdateState(PlayerController player)
     {
-        if (player.isTalking)
+        player.rb2d.linearVelocity = Vector2.zero;
+        if (!player.isTalking)
         {
-            player.SwitchState(player.talkingState);
+            player.SwitchState(player.disguisedState);
         }
-
     }
 
     public override void PhysicsUpdate(PlayerController player)
     {
-        player.MovementInput();
+        
     }
 
     public override void OnCollisionEnter(PlayerController player)

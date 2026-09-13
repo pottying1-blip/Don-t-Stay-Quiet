@@ -20,6 +20,7 @@ public class HumanStateManager : MonoBehaviour
     public AudioClip fleshSound;
     public Animator animator;
     public bool isDead = false;
+    public bool isTalking = false;
     public bool isMakingNoises = false;
     public float awarenessRadius = 3f;
     public Vector2 investPos;

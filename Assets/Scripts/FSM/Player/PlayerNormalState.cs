@@ -16,6 +16,10 @@ public class PlayerNormalState : PlayerBaseState
         }
     }
 
+    public override void PhysicsUpdate(PlayerController player)
+    {
+        player.MovementInput();
+    }
     public override void OnCollisionEnter(PlayerController player)
     {
         
