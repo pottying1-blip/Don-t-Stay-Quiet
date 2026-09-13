@@ -9,6 +9,8 @@ public class AutoDoor : MonoBehaviour
     public float doorMovingTime = 3.5f;
     public bool isClosed = true;
     private Coroutine moveCoroutine;
+    private float detectRadius = 2f;
+    private bool isOpen = false;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -23,13 +25,27 @@ public class AutoDoor : MonoBehaviour
 
     void AutoMove()
     {
-        if (Input.GetKeyDown(KeyCode.K))
+        Collider2D[] hits = Physics2D.OverlapCircleAll(transform.position, detectRadius);
+        bool shouldBeOpen = false;
+        foreach (Collider2D people in hits)
         {
-            if (moveCoroutine != null) StopCoroutine(moveCoroutine);
-            Vector2 target = isClosed ? endPos.position : startPos.position;
-            moveCoroutine = StartCoroutine(MoveDoor(target, doorMovingTime));
-            isClosed = !isClosed;
+            if (people.TryGetComponent<PlayerController>(out var player) && player.isPossessed 
+            || people.CompareTag("Scientist")|| people.CompareTag("Soldier"))
+            {
+                shouldBeOpen = true;
+                break;
+            }
         }
+
+        if (shouldBeOpen != isOpen) 
+        {
+            isOpen = shouldBeOpen;
+            if (moveCoroutine != null) StopCoroutine(moveCoroutine);
+
+            Vector2 target = isOpen ? endPos.position : startPos.position;
+            moveCoroutine = StartCoroutine(MoveDoor(target, doorMovingTime));
+        }
+    
     }
 
     IEnumerator MoveDoor(Vector2 target, float duration)

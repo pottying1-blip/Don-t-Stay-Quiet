@@ -15,7 +15,7 @@ public class PlayerController : MonoBehaviour
     private float horizontalInput;
     private float verticalInput;
     private Rigidbody2D rb2d;
-    public float moveSpeed = 7f;
+    public float moveSpeed = 4f;
     private Vector2 moveInput;
     private SpriteRenderer spriteRenderer;
     public float invDuration = 2f;
@@ -23,7 +23,7 @@ public class PlayerController : MonoBehaviour
     private float coyoteTime = 0.5f;
     private float coyoteTimeCounter;
     public bool isCrouch = false;
-    public float crouchSpeed = 2f;
+    public float crouchSpeed = 1f;
     private Vector2 mousePos;
     private Vector2 worldMousePos;
     private Vector2 playerPosition;
