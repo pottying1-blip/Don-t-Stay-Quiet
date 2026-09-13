@@ -7,6 +7,7 @@ public class UIManager : MonoBehaviour
     public Transform playerPos;
     private Camera mainCamera;
     private UnityEngine.Vector2 offset = new UnityEngine.Vector2(0f, -130f);
+    public GameObject dialogue;
     void Awake()
     {
         mainCamera = Camera.main;
