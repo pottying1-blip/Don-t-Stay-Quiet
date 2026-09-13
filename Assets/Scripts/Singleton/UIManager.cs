@@ -1,5 +1,7 @@
-using System.Numerics;
+
+using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour
 {
@@ -8,6 +10,14 @@ public class UIManager : MonoBehaviour
     private Camera mainCamera;
     private UnityEngine.Vector2 offset = new UnityEngine.Vector2(0f, -130f);
     public GameObject dialogue;
+    public TextMeshProUGUI questionText;
+    public TextMeshProUGUI goodChoicesText;
+    public TextMeshProUGUI badChoicesText;
+    public Button goodButton;
+    public Button badButton;
+    private DialogueEntry currentEntry;
+    private HumanStateManager currentNPC;
+    public GameObject talkingDialogueHolder;
     void Awake()
     {
         mainCamera = Camera.main;
@@ -24,6 +34,32 @@ public class UIManager : MonoBehaviour
         MoveToPlayer();
     }
 
+    public void ShowDialogue(DialogueEntry entry, HumanStateManager npc)
+    {
+        talkingDialogueHolder.SetActive(true);
+        currentNPC = npc;
+        currentEntry = entry;
+        questionText.text = entry.question;
+        goodChoicesText.text = entry.goodAnswer.choiceText;
+        badChoicesText.text = entry.badAnswer.choiceText;
+    }
+
+    public void OnGoodButtonClicked()
+    {
+        ApplyChoice(currentEntry.goodAnswer);
+    }
+
+    public void OnBadButtonClicked()
+    {
+        ApplyChoice(currentEntry.badAnswer);
+    }
+
+    void ApplyChoice(DialogueChoice choice)
+    {
+        currentNPC.suspicionLevel += choice.suspicionAmount;
+        GameManager.Instance.globalAlertLevel += choice.alertAmount;
+        talkingDialogueHolder.SetActive(false);
+    }
     void MoveToPlayer()
     {
         UnityEngine.Vector3 truePlayerPos = mainCamera.WorldToScreenPoint(playerPos.position);
