@@ -254,7 +254,7 @@ public class PlayerController : MonoBehaviour
 
     void TurnInvisible()
     {
-        if (coyoteTimeCounter > coyoteTime && !isInvisible)
+        if (coyoteTimeCounter > coyoteTime && !isInvisible && currentState!=talkingState && currentState != disguisedState)
         {
             isInvisible = true;
             StartCoroutine(SlowlyFadeInvisible(0.02f, invDuration = 0.65f));
