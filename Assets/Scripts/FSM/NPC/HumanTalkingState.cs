@@ -5,6 +5,7 @@ public class HumanTalkingState : HumanBaseState
     
     public override void EnterState(HumanStateManager humanState)
     {
+        humanState.isTalking = true;
         DialogueEntry dialogueEntry = humanState.nPCData.dialogueEntries[Random.Range(0, humanState.nPCData.dialogueEntries.Length)];
         humanState.uIManager.ShowDialogue(dialogueEntry, humanState);
     }

@@ -12,9 +12,10 @@ public class PlayerController : MonoBehaviour
     public PlayerBaseState currentState;
     public PlayerNormalState normalState = new PlayerNormalState();
     public PlayerDisguiseState disguisedState = new PlayerDisguiseState();
+    public PlayerTalkingState talkingState = new PlayerTalkingState();
     private float horizontalInput;
     private float verticalInput;
-    private Rigidbody2D rb2d;
+    public Rigidbody2D rb2d;
     public float moveSpeed = 4f;
     private Vector2 moveInput;
     private SpriteRenderer spriteRenderer;
@@ -43,7 +44,7 @@ public class PlayerController : MonoBehaviour
     private Sprite targetSprite;
     private bool actionTrigerred = false;
     public bool isPossessed = false;
-
+    public bool isTalking = false;
     void Awake()
     {
         rb2d = transform.GetComponent<Rigidbody2D>();
@@ -81,7 +82,7 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        MovementInput();
+        currentState.PhysicsUpdate(this);
     }
 
     public void SwitchState(PlayerBaseState newState)

@@ -30,6 +30,7 @@ public class HumanPatrolState : HumanBaseState
         && humanState.playerController.currentState == humanState.playerController.disguisedState)
         {
             humanState.SwitchState(humanState.humanTalkingState);
+            humanState.playerController.isTalking = true;
         }
 
         Collider2D[] surrounds = Physics2D.OverlapCircleAll(humanState.transform.position, humanState.awarenessRadius);
