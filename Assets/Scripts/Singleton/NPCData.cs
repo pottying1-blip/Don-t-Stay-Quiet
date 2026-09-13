@@ -8,6 +8,7 @@ public class NPCData : ScriptableObject
     public NPCTypes nPCTypes;
     public string nPCName;
     public int moveSpeed;
+    public string[] dialogueOpts;
 }
 
 

@@ -12,7 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bd8d9cf8e668a7e42b059b15ad7f3598, type: 3}
   m_Name: Scientist
   m_EditorClassIdentifier: Assembly-CSharp::NPCData
-  portrait: {fileID: 0}
+  portrait: {fileID: 21300000, guid: e428a53e7e950174081c269329644ce0, type: 3}
   nPCTypes: 0
   nPCName: Jaime Schulze
   moveSpeed: 3
+  dialogueOpts:
+  - 
+  - 
+  - 
