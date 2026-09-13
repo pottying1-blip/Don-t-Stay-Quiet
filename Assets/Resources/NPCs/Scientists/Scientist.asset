@@ -16,7 +16,49 @@ MonoBehaviour:
   nPCTypes: 0
   nPCName: Jaime Schulze
   moveSpeed: 3
-  dialogueOpts:
-  - 
-  - 
-  - 
+  dialogueEntries:
+  - question: Hey, are you okay? You look really bad
+    goodAnswer:
+      choiceText: F..ff..fine fine
+      suspicionAmount: -0.5
+      alertOverallAmount: 0
+    badAnswer:
+      choiceText: Arrg...arg...brains...br..
+      suspicionAmount: 1
+      alertOverallAmount: 0.25
+  - question: G'day mate!
+    goodAnswer:
+      choiceText: h...Hi!
+      suspicionAmount: 0
+      alertOverallAmount: 0
+    badAnswer:
+      choiceText: ASRRGGGGGG
+      suspicionAmount: 1
+      alertOverallAmount: 0.35
+  - question: Where are you heading
+    goodAnswer:
+      choiceText: Lab, lab, lab, l...lab
+      suspicionAmount: -0.15
+      alertOverallAmount: 0
+    badAnswer:
+      choiceText: LAB...KILLL...LA..LAB KILL
+      suspicionAmount: 2
+      alertOverallAmount: 0.25
+  - question: Jeez...I'm having a nightmare recently!
+    goodAnswer:
+      choiceText: ..........
+      suspicionAmount: 0
+      alertOverallAmount: 0
+    badAnswer:
+      choiceText: GRAAAA,...GRA..GRAAAA
+      suspicionAmount: 0.25
+      alertOverallAmount: 0
+  - question: You free on Tuesday? We are planning on parties
+    goodAnswer:
+      choiceText: Y...ye...yes I free
+      suspicionAmount: -0.25
+      alertOverallAmount: 0
+    badAnswer:
+      choiceText: PAR...PART-Y...BRAINSSS
+      suspicionAmount: 0.5
+      alertOverallAmount: 0.1

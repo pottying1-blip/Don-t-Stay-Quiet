@@ -26,6 +26,12 @@ public class HumanPatrolState : HumanBaseState
             humanState.transform.position = UnityEngine.Vector2.Lerp(humanState.posA, humanState.posB, pingPongValue);
         }
 
+        if (humanState.playerController.isInvisible == false && distance < humanState.scareDistance 
+        && humanState.playerController.currentState == humanState.playerController.disguisedState)
+        {
+            humanState.SwitchState(humanState.humanTalkingState);
+        }
+
         Collider2D[] surrounds = Physics2D.OverlapCircleAll(humanState.transform.position, humanState.awarenessRadius);
         foreach (Collider2D obj in surrounds)
         {

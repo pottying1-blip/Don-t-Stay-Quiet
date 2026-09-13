@@ -8,6 +8,7 @@ public class HumanStateManager : MonoBehaviour
     public HumanInvestState humanInvestState = new HumanInvestState();
     public HumanScareState humanScareState = new HumanScareState();
     public HumanDeadState humanDeadState = new HumanDeadState();
+    public HumanTalkingState humanTalkingState = new HumanTalkingState();
     public UnityEngine.Vector2 posA = new UnityEngine.Vector2(2.5f, 2f);
     public UnityEngine.Vector2 posB = new UnityEngine.Vector2(2.5f, -1f);
     public float patrolSpeed = 0.1f;
@@ -22,7 +23,9 @@ public class HumanStateManager : MonoBehaviour
     public bool isMakingNoises = false;
     public float awarenessRadius = 3f;
     public Vector2 investPos;
-    
+    public float suspicionLevel;
+    public NPCData nPCData;
+    public UIManager uIManager;
     void Start()
     {
         humanCurrentState = humanPatrolState;
