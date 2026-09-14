@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Numerics;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class HumanPatrolState : HumanBaseState
@@ -12,25 +13,27 @@ public class HumanPatrolState : HumanBaseState
 
     public override void UpdateState(HumanStateManager humanState)
     {   
+        humanState.patrolElapsedTime += Time.deltaTime;
+
         float distance = UnityEngine.Vector2.Distance(humanState.transform.position, 
         humanState.playerController.transform.position);
 
         if (humanState.playerController.isInvisible == false && distance < humanState.scareDistance
-         && humanState.playerController.currentState!=humanState.playerController.disguisedState)
+         && humanState.playerController.currentState != humanState.playerController.disguisedState)
         {
             humanState.SwitchState(humanState.humanScareState);
         }
         else 
         {
-            float pingPongValue = Mathf.PingPong(Time.time*humanState.patrolSpeed, 1f);
+            float pingPongValue = Mathf.PingPong(humanState.patrolElapsedTime*humanState.patrolSpeed, 1f);
             humanState.transform.position = UnityEngine.Vector2.Lerp(humanState.posA, humanState.posB, pingPongValue);
         }
 
         if (humanState.playerController.isInvisible == false && distance < humanState.scareDistance 
-        && humanState.playerController.currentState == humanState.playerController.disguisedState)
+        && humanState.playerController.currentState == humanState.playerController.disguisedState && !humanState.playerController.isTalking)
         {
             humanState.SwitchState(humanState.humanTalkingState);
-            humanState.playerController.isTalking = true;
+        
         }
 
         Collider2D[] surrounds = Physics2D.OverlapCircleAll(humanState.transform.position, humanState.awarenessRadius);

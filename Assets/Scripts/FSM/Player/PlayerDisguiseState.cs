@@ -13,7 +13,6 @@ public class PlayerDisguiseState : PlayerBaseState
         {
             player.SwitchState(player.talkingState);
         }
-
     }
 
     public override void PhysicsUpdate(PlayerController player)
