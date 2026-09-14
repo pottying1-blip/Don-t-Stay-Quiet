@@ -12,6 +12,8 @@ public class HumanPatrolState : HumanBaseState
 
     public override void UpdateState(HumanStateManager humanState)
     {   
+        humanState.patrolElapsedTime += Time.deltaTime;
+
         float distance = UnityEngine.Vector2.Distance(humanState.transform.position, 
         humanState.playerController.transform.position);
 
@@ -22,7 +24,7 @@ public class HumanPatrolState : HumanBaseState
         }
         else 
         {
-            float pingPongValue = Mathf.PingPong(Time.time*humanState.patrolSpeed, 1f);
+            float pingPongValue = Mathf.PingPong(humanState.patrolElapsedTime*humanState.patrolSpeed, 1f);
             humanState.transform.position = UnityEngine.Vector2.Lerp(humanState.posA, humanState.posB, pingPongValue);
         }
 

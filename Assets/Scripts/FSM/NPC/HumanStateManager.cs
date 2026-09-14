@@ -27,6 +27,8 @@ public class HumanStateManager : MonoBehaviour
     public float suspicionLevel;
     public NPCData nPCData;
     public UIManager uIManager;
+    public float patrolElapsedTime;
+    public bool hasTalked = false;
     void Start()
     {
         humanCurrentState = humanPatrolState;
