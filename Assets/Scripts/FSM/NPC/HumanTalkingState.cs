@@ -7,13 +7,12 @@ public class HumanTalkingState : HumanBaseState
     
     public override void EnterState(HumanStateManager humanState)
     {
-        humanState.isTalking = true;
-        if (humanState.isTalking && !humanState.hasTalked)
+        if (!humanState.isTalking && !humanState.hasTalked)
         {
+            humanState.isTalking = true;
+            humanState.playerController.isTalking = true;
             DialogueEntry dialogueEntry = humanState.nPCData.dialogueEntries[Random.Range(0, humanState.nPCData.dialogueEntries.Length)];
             humanState.uIManager.ShowDialogue(dialogueEntry, humanState);
-
-            humanState.StartCoroutine(ReturnToWork(humanState));
             humanState.StartCoroutine(ConversationInterval(humanState));
         } 
     }
@@ -31,12 +30,6 @@ public class HumanTalkingState : HumanBaseState
         
     }
 
-    IEnumerator ReturnToWork(HumanStateManager humanState)
-    {
-        yield return new WaitForSecondsRealtime(1f);
-        humanState.isTalking = false;
-        humanState.hasTalked = true;
-    }
 
     IEnumerator ConversationInterval(HumanStateManager humanState)
     {

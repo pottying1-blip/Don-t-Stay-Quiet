@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Numerics;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class HumanPatrolState : HumanBaseState
@@ -18,7 +19,7 @@ public class HumanPatrolState : HumanBaseState
         humanState.playerController.transform.position);
 
         if (humanState.playerController.isInvisible == false && distance < humanState.scareDistance
-         && humanState.playerController.currentState!=humanState.playerController.disguisedState)
+         && humanState.playerController.currentState != humanState.playerController.disguisedState)
         {
             humanState.SwitchState(humanState.humanScareState);
         }
@@ -29,10 +30,10 @@ public class HumanPatrolState : HumanBaseState
         }
 
         if (humanState.playerController.isInvisible == false && distance < humanState.scareDistance 
-        && humanState.playerController.currentState == humanState.playerController.disguisedState)
+        && humanState.playerController.currentState == humanState.playerController.disguisedState && !humanState.playerController.isTalking)
         {
             humanState.SwitchState(humanState.humanTalkingState);
-            humanState.playerController.isTalking = true;
+        
         }
 
         Collider2D[] surrounds = Physics2D.OverlapCircleAll(humanState.transform.position, humanState.awarenessRadius);

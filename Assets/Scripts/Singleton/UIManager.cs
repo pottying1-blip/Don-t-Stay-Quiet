@@ -48,11 +48,17 @@ public class UIManager : MonoBehaviour
     public void OnGoodButtonClicked()
     {
         ApplyChoice(currentEntry.goodAnswer);
+        currentNPC.isTalking = false;
+        currentNPC.hasTalked = true;
+        playerController.isTalking = false;
     }
 
     public void OnBadButtonClicked()
     {
         ApplyChoice(currentEntry.badAnswer);
+        currentNPC.isTalking = false;
+        currentNPC.hasTalked = true;
+        playerController.isTalking = false;
     }
 
     void ApplyChoice(DialogueChoice choice)
@@ -60,7 +66,6 @@ public class UIManager : MonoBehaviour
         currentNPC.suspicionLevel += choice.suspicionAmount;
         GameManager.Instance.globalAlertLevel += choice.alertAmount;
         talkingDialogueHolder.SetActive(false);
-        playerController.isTalking = false;
     }
     void MoveToPlayer()
     {
