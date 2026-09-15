@@ -9,6 +9,7 @@ public class HumanStateManager : MonoBehaviour
     public HumanScareState humanScareState = new HumanScareState();
     public HumanDeadState humanDeadState = new HumanDeadState();
     public HumanTalkingState humanTalkingState = new HumanTalkingState();
+    public HumanAlertState humanAlertState = new HumanAlertState();
     public UnityEngine.Vector2 posA = new UnityEngine.Vector2(2.5f, 2f);
     public UnityEngine.Vector2 posB = new UnityEngine.Vector2(2.5f, -1f);
     public float patrolSpeed = 0.1f;
@@ -29,6 +30,7 @@ public class HumanStateManager : MonoBehaviour
     public UIManager uIManager;
     public float patrolElapsedTime;
     public bool hasTalked = false;
+    public float warningRadius = 4f;
     void Start()
     {
         humanCurrentState = humanPatrolState;
