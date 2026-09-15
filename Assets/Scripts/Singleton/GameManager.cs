@@ -4,7 +4,7 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
     public float globalAlertLevel;
-
+    public float globalAlertThreshold = 5f;
     void Awake()
     {
         Instance = this;
