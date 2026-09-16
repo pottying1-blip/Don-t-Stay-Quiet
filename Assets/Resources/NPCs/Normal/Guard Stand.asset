@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bd8d9cf8e668a7e42b059b15ad7f3598, type: 3}
   m_Name: Guard Stand
   m_EditorClassIdentifier: Assembly-CSharp::NPCData
-  portrait: {fileID: 0}
+  portrait: {fileID: 4538612778290672082, guid: 1b614b8c2c0b5674d9ac0f1da4b6c2f6, type: 3}
   nPCTypes: 2
-  nPCName: Sol 1
+  nPCName: S.01
   moveSpeed: 4
   awarenessRadius: 6
   canAttack: 1

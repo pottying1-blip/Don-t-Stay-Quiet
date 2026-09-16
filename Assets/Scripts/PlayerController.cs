@@ -257,7 +257,7 @@ public class PlayerController : MonoBehaviour
         if (coyoteTimeCounter > coyoteTime && !isInvisible && currentState!=talkingState && currentState != disguisedState)
         {
             isInvisible = true;
-            StartCoroutine(SlowlyFadeInvisible(0.02f, invDuration = 0.65f));
+            StartCoroutine(SlowlyFadeInvisible(0.3f, invDuration = 0.65f));
         }
 
         if (rb2d.linearVelocity.magnitude > crouchSpeed && isInvisible)
