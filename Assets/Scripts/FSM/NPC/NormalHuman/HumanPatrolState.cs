@@ -25,8 +25,11 @@ public class HumanPatrolState : HumanBaseState
         }
         else 
         {
-            float pingPongValue = Mathf.PingPong(humanState.patrolElapsedTime*humanState.patrolSpeed, 1f);
-            humanState.transform.position = UnityEngine.Vector2.Lerp(humanState.posA, humanState.posB, pingPongValue);
+            if (humanState.nPCData.canPatrol)
+            {
+                float pingPongValue = Mathf.PingPong(humanState.patrolElapsedTime*humanState.patrolSpeed, 1f);
+                humanState.transform.position = UnityEngine.Vector2.Lerp(humanState.posA, humanState.posB, pingPongValue);
+            }
         }
 
         if (humanState.playerController.isInvisible == false && distance < humanState.scareDistance 
@@ -36,7 +39,7 @@ public class HumanPatrolState : HumanBaseState
         
         }
 
-        Collider2D[] surrounds = Physics2D.OverlapCircleAll(humanState.transform.position, humanState.awarenessRadius);
+        Collider2D[] surrounds = Physics2D.OverlapCircleAll(humanState.transform.position, humanState.awarenessRange);
         foreach (Collider2D obj in surrounds)
         {
             
