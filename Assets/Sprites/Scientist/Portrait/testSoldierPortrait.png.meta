@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: e428a53e7e950174081c269329644ce0
+guid: 1b614b8c2c0b5674d9ac0f1da4b6c2f6
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -1429074465301821389
-    second: JaimeSchulzeScien01_0
+      213: 4538612778290672082
+    second: testSoldierPortrait_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -139,7 +139,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: JaimeSchulzeScien01_0
+      name: testSoldierPortrait_0
       rect:
         serializedVersion: 2
         x: 0
@@ -154,8 +154,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 3388a1a6858ea2ce0800000000000000
-      internalID: -1429074465301821389
+      spriteID: 2d1701776446cfe30800000000000000
+      internalID: 4538612778290672082
       vertices: []
       indices: 
       edges: []
@@ -164,7 +164,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 5e97eb03825dee720800000000000000
+    spriteID: 
     internalID: 0
     vertices: []
     indices: 
@@ -174,7 +174,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      JaimeSchulzeScien01_0: -1429074465301821389
+      testSoldierPortrait_0: 4538612778290672082
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

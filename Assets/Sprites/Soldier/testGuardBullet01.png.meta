@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: e428a53e7e950174081c269329644ce0
+guid: c193e59a04fdb9f4087346fe4479ab59
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -1429074465301821389
-    second: JaimeSchulzeScien01_0
+      213: -5567747985660457914
+    second: testGuardBullet01_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -46,7 +46,7 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 2
+  spriteMode: 1
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -139,13 +139,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: JaimeSchulzeScien01_0
+      name: testGuardBullet01_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 0
-        width: 194
-        height: 146
+        x: 4
+        y: 2
+        width: 8
+        height: 12
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -154,8 +154,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 3388a1a6858ea2ce0800000000000000
-      internalID: -1429074465301821389
+      spriteID: 64ccfcbc4b26bb2b0800000000000000
+      internalID: -5567747985660457914
       vertices: []
       indices: 
       edges: []
@@ -174,7 +174,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      JaimeSchulzeScien01_0: -1429074465301821389
+      testGuardBullet01_0: -5567747985660457914
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

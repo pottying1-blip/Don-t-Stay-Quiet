@@ -20,6 +20,7 @@ public class UIManager : MonoBehaviour
     public GameObject talkingDialogueHolder;
     public PlayerController playerController;
     public TextMeshProUGUI nPCNameShow;
+    public Image nPCPortrait;
     void Awake()
     {
         mainCamera = Camera.main;
@@ -36,13 +37,14 @@ public class UIManager : MonoBehaviour
         MoveToPlayer();
     }
 
-    public void ShowDialogue(DialogueEntry entry, HumanStateManager npc, string nPCName)
+    public void ShowDialogue(DialogueEntry entry, HumanStateManager npc, string nPCName, Sprite portrait)
     {
         talkingDialogueHolder.SetActive(true);
         currentNPC = npc;
         currentEntry = entry;
         questionText.text = entry.question;
         nPCNameShow.text = nPCName;
+        nPCPortrait.sprite = portrait;
         goodChoicesText.text = entry.goodAnswer.choiceText;
         badChoicesText.text = entry.badAnswer.choiceText;
     }

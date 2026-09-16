@@ -12,7 +12,7 @@ public class HumanTalkingState : HumanBaseState
             humanState.isTalking = true;
             humanState.playerController.isTalking = true;
             DialogueEntry dialogueEntry = humanState.nPCData.dialogueEntries[Random.Range(0, humanState.nPCData.dialogueEntries.Length)];
-            humanState.uIManager.ShowDialogue(dialogueEntry, humanState, humanState.nPCData.nPCName);
+            humanState.uIManager.ShowDialogue(dialogueEntry, humanState, humanState.nPCData.nPCName, humanState.nPCData.portrait);
             humanState.StartCoroutine(ConversationInterval(humanState));
         } 
     }
