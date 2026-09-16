@@ -8,6 +8,9 @@ public class NPCData : ScriptableObject
     public NPCTypes nPCTypes;
     public string nPCName;
     public float moveSpeed;
+    public float awarenessRadius;
+    public bool canAttack;
+    public bool canPatrol;
     public DialogueEntry[] dialogueEntries;
 }
 

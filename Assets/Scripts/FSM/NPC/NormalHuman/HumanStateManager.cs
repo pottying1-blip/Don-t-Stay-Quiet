@@ -10,6 +10,7 @@ public class HumanStateManager : MonoBehaviour
     public HumanDeadState humanDeadState = new HumanDeadState();
     public HumanTalkingState humanTalkingState = new HumanTalkingState();
     public HumanAlertState humanAlertState = new HumanAlertState();
+    public HumanAttackState humanAttackState = new HumanAttackState();
     public UnityEngine.Vector2 posA = new UnityEngine.Vector2(2.5f, 2f);
     public UnityEngine.Vector2 posB = new UnityEngine.Vector2(2.5f, -1f);
     public float patrolSpeed = 0.1f;
@@ -23,19 +24,19 @@ public class HumanStateManager : MonoBehaviour
     public bool isDead = false;
     public bool isTalking = false;
     public bool isMakingNoises = false;
-    public float awarenessRadius = 3f;
+    public float awarenessRange;
     public Vector2 investPos;
     public float suspicionLevel;
     public NPCData nPCData;
     public UIManager uIManager;
     public float patrolElapsedTime;
     public bool hasTalked = false;
-    public float warningRadius = 4f;
+    
     void Start()
     {
         humanCurrentState = humanPatrolState;
         humanCurrentState.EnterState(this);
-        
+        awarenessRange = nPCData.awarenessRadius;
     }
 
     void Update()
