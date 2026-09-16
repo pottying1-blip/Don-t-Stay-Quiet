@@ -578,7 +578,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 4
   m_MaskInteraction: 0
-  m_Sprite: {fileID: 21300000, guid: 502b93bd6ee7b534a8f82dcfa26db3ed, type: 3}
+  m_Sprite: {fileID: 21300000, guid: a5c4dd27a8ca2f8479ad8c3c886136ae, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -597,7 +597,7 @@ Transform:
   m_GameObject: {fileID: 349368032}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1.59, y: 16.59, z: 0}
+  m_LocalPosition: {x: 1.531, y: 16.774, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -5166,14 +5166,13 @@ MonoBehaviour:
   isDead: 0
   isTalking: 0
   isMakingNoises: 0
-  awarenessRadius: 4
+  awarenessRange: 0
   investPos: {x: 0, y: 0}
   suspicionLevel: 0
-  nPCData: {fileID: 11400000, guid: d13ddce2c18c8f848b980765505514bb, type: 2}
+  nPCData: {fileID: 11400000, guid: 1ba2e397e20fb494d94dae3e4eda016e, type: 2}
   uIManager: {fileID: 847413725}
   patrolElapsedTime: 0
   hasTalked: 0
-  warningRadius: 4
 --- !u!95 &477207854
 Animator:
   serializedVersion: 7
@@ -5455,6 +5454,9 @@ GameObject:
   - component: {fileID: 573481723}
   - component: {fileID: 573481722}
   - component: {fileID: 573481721}
+  - component: {fileID: 573481726}
+  - component: {fileID: 573481725}
+  - component: {fileID: 573481724}
   m_Layer: 0
   m_Name: testSoldier01
   m_TagString: Untagged
@@ -5557,7 +5559,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 4
   m_MaskInteraction: 0
-  m_Sprite: {fileID: 21300000, guid: 502b93bd6ee7b534a8f82dcfa26db3ed, type: 3}
+  m_Sprite: {fileID: 21300000, guid: a5c4dd27a8ca2f8479ad8c3c886136ae, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -5576,12 +5578,163 @@ Transform:
   m_GameObject: {fileID: 573481720}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.47, y: 16.55, z: 0}
+  m_LocalPosition: {x: -0.47, y: 16.705, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!82 &573481724
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 573481720}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_Resource: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+--- !u!95 &573481725
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 573481720}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 0}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &573481726
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 573481720}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 718c104b6907ed24e9d2e293214b9ceb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::HumanStateManager
+  posA: {x: 2.5, y: 2}
+  posB: {x: 2.5, y: -1}
+  patrolSpeed: 0.1
+  playerController: {fileID: 446136911}
+  scareDistance: 1
+  humanSoundSource: {fileID: 573481724}
+  gaspSound: {fileID: 8300000, guid: 82b40dccfc75ff24083f67a1aef54b32, type: 3}
+  walkingSound: {fileID: 8300000, guid: b7e1912e6174c4543ac60c96dc1e48c8, type: 3}
+  fleshSound: {fileID: 8300000, guid: 19ff8486b5d96d348acfb887be3e64d6, type: 3}
+  animator: {fileID: 573481725}
+  isDead: 0
+  isTalking: 0
+  isMakingNoises: 0
+  awarenessRange: 5
+  investPos: {x: 0, y: 0}
+  suspicionLevel: 0
+  nPCData: {fileID: 11400000, guid: 7755a46f63e06a048a078bafde049f69, type: 2}
+  uIManager: {fileID: 847413725}
+  patrolElapsedTime: 0
+  hasTalked: 0
 --- !u!1 &598079787
 GameObject:
   m_ObjectHideFlags: 0
@@ -10253,6 +10406,7 @@ MonoBehaviour:
   badButton: {fileID: 935851088}
   talkingDialogueHolder: {fileID: 2103956334}
   playerController: {fileID: 446136911}
+  nPCNameShow: {fileID: 1959443131}
 --- !u!4 &847413726
 Transform:
   m_ObjectHideFlags: 0
@@ -11320,14 +11474,13 @@ MonoBehaviour:
   isDead: 0
   isTalking: 0
   isMakingNoises: 0
-  awarenessRadius: 4
+  awarenessRange: 0
   investPos: {x: 0, y: 0}
   suspicionLevel: 0
   nPCData: {fileID: 11400000, guid: d13ddce2c18c8f848b980765505514bb, type: 2}
   uIManager: {fileID: 847413725}
   patrolElapsedTime: 0
   hasTalked: 0
-  warningRadius: 4
 --- !u!212 &1469124094
 SpriteRenderer:
   serializedVersion: 2
@@ -11818,7 +11971,7 @@ Transform:
   m_GameObject: {fileID: 1635593115}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.698, y: 1.429, z: 0}
+  m_LocalPosition: {x: 1.46, y: 8.49, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
