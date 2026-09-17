@@ -19,6 +19,7 @@ MonoBehaviour:
   awarenessRadius: 4
   canAttack: 0
   canPatrol: 1
+  possessTime: 30
   dialogueEntries:
   - question: Hey, are you okay? You look really bad
     goodAnswer:
