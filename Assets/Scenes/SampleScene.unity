@@ -4890,6 +4890,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PlayerController
   rb2d: {fileID: 0}
   moveSpeed: 4
+  spriteRenderer: {fileID: 0}
   invDuration: 2
   isInvisible: 0
   isCrouch: 0
@@ -4903,11 +4904,14 @@ MonoBehaviour:
   consumeGuidanceCanvas: {fileID: 847743211}
   hasShownConsumeGuidance: 0
   humanStateManager: {fileID: 0}
+  possessCount: 0
+  possessThreshold: 0
   playerSoundSource: {fileID: 446136916}
   eatingSound: {fileID: 8300000, guid: fd0a7c0ca8cdd124ca652666964d0675, type: 3}
   possessSound: {fileID: 8300000, guid: d73e2cbfa76cfd74a8739a2ce7b60ab5, type: 3}
   isPossessed: 0
   isTalking: 0
+  currentBaseForm: {fileID: 4817761571909306170, guid: f8feb5008ee74414fb480512e27b7d18, type: 3}
 --- !u!212 &446136912
 SpriteRenderer:
   serializedVersion: 2

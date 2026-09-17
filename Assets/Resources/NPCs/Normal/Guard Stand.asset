@@ -19,6 +19,7 @@ MonoBehaviour:
   awarenessRadius: 6
   canAttack: 1
   canPatrol: 0
+  possessTime: 20
   dialogueEntries:
   - question: Reason of entry?
     goodAnswer:
