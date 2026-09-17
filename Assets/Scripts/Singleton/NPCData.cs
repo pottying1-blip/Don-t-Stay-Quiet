@@ -12,6 +12,7 @@ public class NPCData : ScriptableObject
     public float awarenessRadius;
     public bool canAttack;
     public bool canPatrol;
+    public float possessTime;
     public DialogueEntry[] dialogueEntries;
 }
 

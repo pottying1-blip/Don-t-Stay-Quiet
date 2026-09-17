@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Linq;
+using NUnit.Framework;
 using Unity.Jobs;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -18,7 +19,7 @@ public class PlayerController : MonoBehaviour
     public Rigidbody2D rb2d;
     public float moveSpeed = 4f;
     private Vector2 moveInput;
-    private SpriteRenderer spriteRenderer;
+    public SpriteRenderer spriteRenderer;
     public float invDuration = 2f;
     public bool isInvisible = false;
     private float coyoteTime = 0.5f;
@@ -38,6 +39,9 @@ public class PlayerController : MonoBehaviour
     private float pierceDistance = 3f;
     private float timerQPress = 1.25f;
     private float holdTime = 0f;
+    private Vector2 growSize = new Vector2(0.05f, 0.05f);
+    public float possessCount = 0;
+    public float possessThreshold;
     public AudioSource playerSoundSource;
     public AudioClip eatingSound;
     public AudioClip possessSound;
@@ -45,6 +49,7 @@ public class PlayerController : MonoBehaviour
     private bool actionTrigerred = false;
     public bool isPossessed = false;
     public bool isTalking = false;
+    public Sprite currentBaseForm;
     void Awake()
     {
         rb2d = transform.GetComponent<Rigidbody2D>();
@@ -179,18 +184,12 @@ public class PlayerController : MonoBehaviour
 
     void HandleConsumeInput()
     {
-        Vector2 growSize = new Vector2(0.2f, 0.2f);
         if (Input.GetKey(KeyCode.Q) && hasShownConsumeGuidance && humanStateManager != null)
         {
             holdTime+= Time.deltaTime;
             if (holdTime >= timerQPress && !actionTrigerred)
             {
-                actionTrigerred = true;
-                playerSoundSource.PlayOneShot(possessSound);
-                isPossessed = true;
-                transform.position = humanStateManager.transform.position;
-                spriteRenderer.sprite = targetSprite;
-                StartCoroutine(WaitForDelete());
+                Possess();
             }
         }
 
@@ -198,12 +197,7 @@ public class PlayerController : MonoBehaviour
         {
             if (!actionTrigerred && hasShownConsumeGuidance && humanStateManager != null && holdTime < timerQPress)
             {
-                playerSoundSource.PlayOneShot(eatingSound);
-                transform.localScale = (Vector2)transform.localScale + growSize;
-                transform.position = humanStateManager.transform.position;
-                Destroy(humanStateManager.gameObject);
-                consumeGuidanceCanvas.SetActive(false);
-                humanStateManager = null; 
+                Consume();
             }
         holdTime = 0f;
         actionTrigerred = false;
@@ -212,7 +206,7 @@ public class PlayerController : MonoBehaviour
     }
 
     IEnumerator WaitForDelete(){
-        yield return new WaitForSecondsRealtime(1.0f);
+        yield return new WaitForSecondsRealtime(0.25f);
         Destroy(humanStateManager.gameObject);
         consumeGuidanceCanvas.SetActive(false);
         humanStateManager = null; 
@@ -238,6 +232,26 @@ public class PlayerController : MonoBehaviour
         return closest;
     }
 
+    void Consume()
+    {
+        playerSoundSource.PlayOneShot(eatingSound);
+        transform.localScale = (Vector2)transform.localScale + growSize;
+        transform.position = humanStateManager.transform.position;
+        Destroy(humanStateManager.gameObject);
+        consumeGuidanceCanvas.SetActive(false);
+        humanStateManager = null; 
+    }
+
+    void Possess()
+    {
+        actionTrigerred = true;
+        playerSoundSource.PlayOneShot(possessSound);
+        isPossessed = true;
+        transform.position = humanStateManager.transform.position;
+        spriteRenderer.sprite = targetSprite;
+        possessThreshold = humanStateManager.nPCData.possessTime;
+        StartCoroutine(WaitForDelete());
+    }
     void CrouchMovement()
     {
         if (Input.GetKeyDown(KeyCode.Space) && !isCrouch)
