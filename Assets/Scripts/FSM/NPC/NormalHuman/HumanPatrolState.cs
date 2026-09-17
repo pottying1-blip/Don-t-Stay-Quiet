@@ -8,7 +8,7 @@ public class HumanPatrolState : HumanBaseState
 
     public override void EnterState(HumanStateManager humanState)
     {
-        Debug.Log("The human is working");
+        
     }
 
     public override void UpdateState(HumanStateManager humanState)
@@ -25,11 +25,7 @@ public class HumanPatrolState : HumanBaseState
         }
         else 
         {
-            if (humanState.nPCData.canPatrol)
-            {
-                float pingPongValue = Mathf.PingPong(humanState.patrolElapsedTime*humanState.patrolSpeed, 1f);
-                humanState.transform.position = UnityEngine.Vector2.Lerp(humanState.posA, humanState.posB, pingPongValue);
-            }
+            HandlePatrol(humanState);
         }
 
         if (humanState.playerController.isInvisible == false && distance < humanState.scareDistance 
@@ -39,10 +35,14 @@ public class HumanPatrolState : HumanBaseState
         
         }
 
+        CheckNoiseInvestigation(humanState);
+    }
+
+    void CheckNoiseInvestigation(HumanStateManager humanState)
+    {
         Collider2D[] surrounds = Physics2D.OverlapCircleAll(humanState.transform.position, humanState.awarenessRange);
         foreach (Collider2D obj in surrounds)
         {
-            
             if (obj.TryGetComponent<InteractableObject>(out var interactableObject))
             {
                 if (interactableObject.IsMakingNoise())
@@ -53,6 +53,13 @@ public class HumanPatrolState : HumanBaseState
                 }
             }
         }
+    }
+
+    void HandlePatrol(HumanStateManager humanState)
+    {
+        if (!humanState.nPCData.canPatrol) return;
+        float pingPongValue = Mathf.PingPong(humanState.patrolElapsedTime*humanState.patrolSpeed, 1f);
+        humanState.transform.position = UnityEngine.Vector2.Lerp(humanState.posA, humanState.posB, pingPongValue);
     }
 
     public override void OnCollisionEnter(HumanStateManager humanState)
