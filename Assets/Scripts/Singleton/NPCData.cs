@@ -10,6 +10,7 @@ public class NPCData : ScriptableObject
     public float moveSpeed;
     public float awarenessRadius;
     public bool canAttack;
+    public GameObject bulletPrefab;
     public bool canPatrol;
     public float possessTime;
     public DialogueEntry[] dialogueEntries;

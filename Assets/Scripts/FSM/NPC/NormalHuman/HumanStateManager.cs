@@ -31,7 +31,7 @@ public class HumanStateManager : MonoBehaviour
     public UIManager uIManager;
     public float patrolElapsedTime;
     public bool hasTalked = false;
-    
+    public float soldierAttackDis = 4f;
     void Start()
     {
         humanCurrentState = humanPatrolState;
