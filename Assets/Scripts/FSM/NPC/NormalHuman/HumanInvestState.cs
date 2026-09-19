@@ -20,10 +20,14 @@ public class HumanInvestState : HumanBaseState
 
         float distance = Vector2.Distance(humanState.transform.position, 
         humanState.playerController.transform.position);
-        if (humanState.playerController.isInvisible == false && distance < humanState.scareDistance)
+
+        if (humanState.playerController.isInvisible == false && distance < humanState.scareDistance
+        && humanState.playerController.currentState != humanState.playerController.disguisedState)
         {
             humanState.SwitchState(humanState.humanScareState);
         }
+
+        
     }
 
     public override void OnCollisionEnter(HumanStateManager humanState)
