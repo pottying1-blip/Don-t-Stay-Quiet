@@ -12,13 +12,13 @@ public class HumanScareState : HumanBaseState
         humanState.StartCoroutine(StopNoiseMaking(humanState));
         if (!humanState.isDead)
         {
-            humanState.StartCoroutine(StartAlerting(humanState));
+            humanState.StartCoroutine(StartToAct(humanState));
         }
     }
 
     public override void UpdateState(HumanStateManager humanState)
     {
-        
+
     }
 
     public override void OnCollisionEnter(HumanStateManager humanState)
@@ -32,10 +32,18 @@ public class HumanScareState : HumanBaseState
         humanState.isMakingNoises = false;
     }
 
-    IEnumerator StartAlerting(HumanStateManager humanState)
+    IEnumerator StartToAct(HumanStateManager humanState)
     {
-        yield return new WaitForSecondsRealtime(2.5f);
-        humanState.SwitchState(humanState.humanAlertState);
+        yield return new WaitForSecondsRealtime(1.5f);
+        if (humanState.nPCData.nPCTypes == NPCTypes.Scientist)
+        {
+            humanState.SwitchState(humanState.humanAlertState);
+        }
+
+        if (humanState.nPCData.nPCTypes == NPCTypes.Soldier)
+        {
+            humanState.SwitchState(humanState.humanAttackState);
+        }
     }
 
 }
