@@ -16,7 +16,7 @@ MonoBehaviour:
   nPCTypes: 2
   nPCName: S.01
   moveSpeed: 4
-  awarenessRadius: 6
+  awarenessRadius: 8
   canAttack: 1
   bulletPrefab: {fileID: 1338932092180836727, guid: c247efd9eb7397d44abc46f843025526, type: 3}
   canPatrol: 0
