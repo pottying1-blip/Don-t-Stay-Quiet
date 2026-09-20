@@ -18,6 +18,7 @@ MonoBehaviour:
   moveSpeed: 4
   awarenessRadius: 6
   canAttack: 1
+  bulletPrefab: {fileID: 1338932092180836727, guid: c247efd9eb7397d44abc46f843025526, type: 3}
   canPatrol: 0
   possessTime: 20
   dialogueEntries:
