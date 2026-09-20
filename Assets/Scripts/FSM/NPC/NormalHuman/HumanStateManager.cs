@@ -32,7 +32,7 @@ public class HumanStateManager : MonoBehaviour
     public float patrolElapsedTime;
     public bool hasTalked = false;
     public float soldierAttackDis = 4f;
-    
+    public float lastSpawnTime = 0f;
     void Start()
     {
         humanCurrentState = humanPatrolState;
