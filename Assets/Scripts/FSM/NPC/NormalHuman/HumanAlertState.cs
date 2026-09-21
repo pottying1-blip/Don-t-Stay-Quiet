@@ -9,9 +9,29 @@ public class HumanAlertState : HumanBaseState
 
     public override void UpdateState(HumanStateManager humanState)
     {
-
+        Transform closestAlert = FindClosestAlertButton(humanState.transform.position, humanState);
+        if (closestAlert != null)
+        {
+            humanState.navMeshAgent.SetDestination(closestAlert.position);
+        }
     }
 
+    public Transform FindClosestAlertButton(Vector2 selfPos, HumanStateManager humanState)
+    {
+        Transform closestButton = null;
+        float closestDistance = float.MaxValue;
+
+        foreach (Transform alertButton in humanState.gameManager.allAlertButtons)
+        {
+            float distance = Vector2.Distance(selfPos, alertButton.transform.position);
+            if (distance < closestDistance)
+            {
+                closestDistance = distance;
+                closestButton = alertButton;
+            }
+        }
+        return closestButton;
+    }
     public override void OnCollisionEnter(HumanStateManager humanState)
     {
         

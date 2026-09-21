@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Experimental.GlobalIllumination;
 
@@ -7,6 +8,7 @@ public class GameManager : MonoBehaviour
     public float globalAlertLevel;
     public float globalAlertThreshold = 5f;
     public bool WarningStart = false;
+    public List<Transform> allAlertButtons;
     void Awake()
     {
         Instance = this;

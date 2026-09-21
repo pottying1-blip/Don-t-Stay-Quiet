@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class HumanStateManager : MonoBehaviour
 {
@@ -33,8 +34,12 @@ public class HumanStateManager : MonoBehaviour
     public bool hasTalked = false;
     public float soldierAttackDis = 4f;
     public float lastSpawnTime = 0f;
+    public float wholeMapRadius = 50f;
+    public GameManager gameManager;
+    public NavMeshAgent navMeshAgent;
     void Start()
     {
+        navMeshAgent = GetComponent<NavMeshAgent>();
         humanCurrentState = humanPatrolState;
         humanCurrentState.EnterState(this);
         awarenessRange = nPCData.awarenessRadius;
@@ -56,5 +61,10 @@ public class HumanStateManager : MonoBehaviour
         if (isDead) return;
         isDead = true;
         SwitchState(humanDeadState);
+    }
+
+    public void SetDestination(Transform targetPos)
+    {
+        navMeshAgent.destination = targetPos.position;
     }
 }
