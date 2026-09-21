@@ -18,7 +18,6 @@ public class HumanAlertState : HumanBaseState
             if (!humanState.navMeshAgent.pathPending && humanState.navMeshAgent.remainingDistance <= humanState.navMeshAgent.stoppingDistance)
             {
                 humanState.gameManager.WarningStart = true;
-                Debug.Log("Da bao dong");
                 humanState.gameManager.hasAlert = true;
                 humanState.emergentPlace = closestAlert;
                 humanState.gameManager.currentAlert = closestAlert;

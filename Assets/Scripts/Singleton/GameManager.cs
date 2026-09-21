@@ -11,6 +11,9 @@ public class GameManager : MonoBehaviour
     public List<Transform> allAlertButtons;
     public Transform currentAlert;
     public bool hasAlert = false;
+    public AudioSource gameAudioSource;
+    public AudioClip warningSound;
+    public bool hasPlayAlert = false;
     void Awake()
     {
         Instance = this;
@@ -27,6 +30,12 @@ public class GameManager : MonoBehaviour
         if (globalAlertLevel >= globalAlertThreshold)
         {
             WarningStart = true;
+        }
+
+        if (hasAlert && !hasPlayAlert)
+        {
+            gameAudioSource.PlayOneShot(warningSound);
+            hasPlayAlert = true;
         }
 
         /*if (WarningStart)
