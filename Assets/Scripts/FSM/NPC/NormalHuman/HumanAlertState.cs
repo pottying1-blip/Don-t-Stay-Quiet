@@ -10,9 +10,14 @@ public class HumanAlertState : HumanBaseState
     public override void UpdateState(HumanStateManager humanState)
     {
         Transform closestAlert = FindClosestAlertButton(humanState.transform.position, humanState);
-        if (closestAlert != null)
+        if (closestAlert != null && !humanState.isDead)
         {
-            humanState.navMeshAgent.SetDestination(closestAlert.position);
+            humanState.SetDestination(closestAlert);
+            
+            if (humanState.transform.position == closestAlert.transform.position)
+            {
+                humanState.gameManager.WarningStart = true;
+            }
         }
     }
 

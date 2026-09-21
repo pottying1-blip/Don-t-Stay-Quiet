@@ -65,6 +65,11 @@ public class HumanStateManager : MonoBehaviour
 
     public void SetDestination(Transform targetPos)
     {
-        navMeshAgent.destination = targetPos.position;
+        navMeshAgent.SetDestination(targetPos.position);
+    }
+
+    public void SetDestination(Vector2 targetPos)
+    {
+        navMeshAgent.SetDestination(targetPos);
     }
 }
