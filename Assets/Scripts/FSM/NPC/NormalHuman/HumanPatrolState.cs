@@ -28,11 +28,15 @@ public class HumanPatrolState : HumanBaseState
             HandlePatrol(humanState);
         }
 
+        if (humanState.gameManager.hasAlert && humanState.nPCData.nPCTypes == NPCTypes.Soldier)
+        {
+            humanState.SwitchState(humanState.humanAlertState);
+        }
+
         if (humanState.playerController.isInvisible == false && distance < humanState.scareDistance 
         && humanState.playerController.currentState == humanState.playerController.disguisedState && !humanState.playerController.isTalking)
         {
             humanState.SwitchState(humanState.humanTalkingState);
-        
         }
 
         CheckNoiseInvestigation(humanState);

@@ -1255,10 +1255,12 @@ MonoBehaviour:
   gaspSound: {fileID: 8300000, guid: b03afef6de1114e4f997d9abc96696b9, type: 3}
   walkingSound: {fileID: 8300000, guid: b7e1912e6174c4543ac60c96dc1e48c8, type: 3}
   fleshSound: {fileID: 8300000, guid: 19ff8486b5d96d348acfb887be3e64d6, type: 3}
+  gunSound: {fileID: 0}
   animator: {fileID: 359021301}
   isDead: 0
   isTalking: 0
   isMakingNoises: 0
+  hasAlert: 0
   awarenessRange: 0
   investPos: {x: 0, y: 0}
   suspicionLevel: 0
@@ -1271,6 +1273,7 @@ MonoBehaviour:
   wholeMapRadius: 50
   gameManager: {fileID: 811674057}
   navMeshAgent: {fileID: 0}
+  emergentPlace: {fileID: 0}
 --- !u!212 &359021303
 SpriteRenderer:
   serializedVersion: 2
@@ -5729,10 +5732,12 @@ MonoBehaviour:
   gaspSound: {fileID: 8300000, guid: b03afef6de1114e4f997d9abc96696b9, type: 3}
   walkingSound: {fileID: 8300000, guid: b7e1912e6174c4543ac60c96dc1e48c8, type: 3}
   fleshSound: {fileID: 8300000, guid: 19ff8486b5d96d348acfb887be3e64d6, type: 3}
+  gunSound: {fileID: 0}
   animator: {fileID: 477207854}
   isDead: 0
   isTalking: 0
   isMakingNoises: 0
+  hasAlert: 0
   awarenessRange: 0
   investPos: {x: 0, y: 0}
   suspicionLevel: 0
@@ -5745,6 +5750,7 @@ MonoBehaviour:
   wholeMapRadius: 50
   gameManager: {fileID: 811674057}
   navMeshAgent: {fileID: 0}
+  emergentPlace: {fileID: 0}
 --- !u!95 &477207854
 Animator:
   serializedVersion: 7
@@ -6346,10 +6352,12 @@ MonoBehaviour:
   gaspSound: {fileID: 8300000, guid: 82b40dccfc75ff24083f67a1aef54b32, type: 3}
   walkingSound: {fileID: 8300000, guid: b7e1912e6174c4543ac60c96dc1e48c8, type: 3}
   fleshSound: {fileID: 8300000, guid: 19ff8486b5d96d348acfb887be3e64d6, type: 3}
+  gunSound: {fileID: 8300000, guid: b44eea666f78dfc4c9eb79fbe777d1bf, type: 3}
   animator: {fileID: 573481725}
   isDead: 0
   isTalking: 0
   isMakingNoises: 0
+  hasAlert: 0
   awarenessRange: 5
   investPos: {x: 0, y: 0}
   suspicionLevel: 0
@@ -6362,6 +6370,7 @@ MonoBehaviour:
   wholeMapRadius: 50
   gameManager: {fileID: 811674057}
   navMeshAgent: {fileID: 0}
+  emergentPlace: {fileID: 0}
 --- !u!114 &573481727
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6397,7 +6406,7 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.75
-  m_Speed: 5
+  m_Speed: 4.5
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 120
@@ -11030,6 +11039,8 @@ MonoBehaviour:
   allAlertButtons:
   - {fileID: 1246500194}
   - {fileID: 1436755333}
+  currentAlert: {fileID: 0}
+  hasAlert: 0
 --- !u!4 &811674058
 Transform:
   m_ObjectHideFlags: 0
@@ -11793,6 +11804,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1246500194}
+  - component: {fileID: 1246500195}
   m_Layer: 0
   m_Name: Alert
   m_TagString: Untagged
@@ -11820,6 +11832,18 @@ RectTransform:
   m_AnchoredPosition: {x: 3.53, y: 3.33}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1246500195
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1246500193}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b37f2791824ffa5468abc7dc3c2b3f8b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AlertReturn
 --- !u!1 &1272782246
 GameObject:
   m_ObjectHideFlags: 0
@@ -12093,6 +12117,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1436755333}
+  - component: {fileID: 1436755334}
   m_Layer: 0
   m_Name: Alert2
   m_TagString: Untagged
@@ -12120,6 +12145,18 @@ RectTransform:
   m_AnchoredPosition: {x: 12.42, y: -1.63}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1436755334
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1436755332}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b37f2791824ffa5468abc7dc3c2b3f8b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AlertReturn
 --- !u!1 &1469124089
 GameObject:
   m_ObjectHideFlags: 0
@@ -12330,10 +12367,12 @@ MonoBehaviour:
   gaspSound: {fileID: 8300000, guid: b03afef6de1114e4f997d9abc96696b9, type: 3}
   walkingSound: {fileID: 8300000, guid: b7e1912e6174c4543ac60c96dc1e48c8, type: 3}
   fleshSound: {fileID: 8300000, guid: 19ff8486b5d96d348acfb887be3e64d6, type: 3}
+  gunSound: {fileID: 0}
   animator: {fileID: 1469124092}
   isDead: 0
   isTalking: 0
   isMakingNoises: 0
+  hasAlert: 0
   awarenessRange: 0
   investPos: {x: 0, y: 0}
   suspicionLevel: 0
@@ -12346,6 +12385,7 @@ MonoBehaviour:
   wholeMapRadius: 50
   gameManager: {fileID: 811674057}
   navMeshAgent: {fileID: 0}
+  emergentPlace: {fileID: 0}
 --- !u!212 &1469124094
 SpriteRenderer:
   serializedVersion: 2
