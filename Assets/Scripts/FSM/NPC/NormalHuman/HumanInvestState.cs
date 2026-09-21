@@ -11,8 +11,9 @@ public class HumanInvestState : HumanBaseState
     public override void UpdateState(HumanStateManager humanState)
     {
         Vector2 humanPos = humanState.transform.position;
-        float speed = 2*Time.deltaTime;
-        humanState.transform.position = Vector2.MoveTowards(humanPos, humanState.investPos, speed);
+        
+        humanState.SetDestination(humanState.investPos);
+
         if ((Vector2)humanState.transform.position == humanState.investPos)
         {
             Debug.Log("He has came to the position!");
