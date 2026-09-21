@@ -30,7 +30,8 @@ public class HumanAttackState : HumanBaseState
                 humanState.transform.rotation);
                 if (bullet.TryGetComponent<Bullet>(out var bullets))
                 {
-                    bullets.Launch(direction);
+                    bullets.Launch(direction, entityRotation);
+                    humanState.humanSoundSource.PlayOneShot(humanState.gunSound);
                 }
                 humanState.lastSpawnTime = Time.time;
                 

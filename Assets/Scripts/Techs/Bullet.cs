@@ -13,7 +13,7 @@ public class Bullet : MonoBehaviour
         
     }
 
-    public void Launch(Vector2 direction)
+    public void Launch(Vector2 direction, Quaternion angle)
     {
         rb2d.linearVelocity = direction.normalized * speed;
     }

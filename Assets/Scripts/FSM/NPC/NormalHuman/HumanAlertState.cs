@@ -12,11 +12,28 @@ public class HumanAlertState : HumanBaseState
         Transform closestAlert = FindClosestAlertButton(humanState.transform.position, humanState);
         if (closestAlert != null && !humanState.isDead)
         {
+            closestAlert.TryGetComponent<AlertReturn>(out var alertReturn);
             humanState.SetDestination(closestAlert);
-            
-            if (humanState.transform.position == closestAlert.transform.position)
+
+            if (!humanState.navMeshAgent.pathPending && humanState.navMeshAgent.remainingDistance <= humanState.navMeshAgent.stoppingDistance)
             {
                 humanState.gameManager.WarningStart = true;
+                humanState.gameManager.hasAlert = true;
+                humanState.emergentPlace = closestAlert;
+                humanState.gameManager.currentAlert = closestAlert;
+            }
+        }
+
+        if (humanState.nPCData.nPCTypes == NPCTypes.Soldier)
+        {
+            float distance = UnityEngine.Vector2.Distance(humanState.transform.position, humanState.playerController.transform.position);
+            humanState.SetDestination(humanState.gameManager.currentAlert);
+
+            float alertDistance = 5f;
+            if (humanState.playerController.isInvisible == false && distance < alertDistance 
+            && humanState.playerController.currentState != humanState.playerController.disguisedState)
+            {
+                humanState.SwitchState(humanState.humanScareState);
             }
         }
     }

@@ -21,10 +21,12 @@ public class HumanStateManager : MonoBehaviour
     public AudioClip gaspSound;
     public AudioClip walkingSound;
     public AudioClip fleshSound;
+    public AudioClip gunSound;
     public Animator animator;
     public bool isDead = false;
     public bool isTalking = false;
     public bool isMakingNoises = false;
+    public bool hasAlert = false;
     public float awarenessRange;
     public Vector2 investPos;
     public float suspicionLevel;
@@ -37,6 +39,7 @@ public class HumanStateManager : MonoBehaviour
     public float wholeMapRadius = 50f;
     public GameManager gameManager;
     public NavMeshAgent navMeshAgent;
+    public Transform emergentPlace;
     void Start()
     {
         navMeshAgent = GetComponent<NavMeshAgent>();

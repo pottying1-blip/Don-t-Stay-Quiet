@@ -9,6 +9,11 @@ public class GameManager : MonoBehaviour
     public float globalAlertThreshold = 5f;
     public bool WarningStart = false;
     public List<Transform> allAlertButtons;
+    public Transform currentAlert;
+    public bool hasAlert = false;
+    public AudioSource gameAudioSource;
+    public AudioClip warningSound;
+    public bool hasPlayAlert = false;
     void Awake()
     {
         Instance = this;
@@ -27,11 +32,17 @@ public class GameManager : MonoBehaviour
             WarningStart = true;
         }
 
-        if (WarningStart)
+        if (hasAlert && !hasPlayAlert)
+        {
+            gameAudioSource.PlayOneShot(warningSound);
+            hasPlayAlert = true;
+        }
+
+        /*if (WarningStart)
         {
             Debug.Log("CANH BAO, CO VAT THE");
             WarningStart = false;
             globalAlertLevel = 0;
-        }
+        }*/
     }
 }
