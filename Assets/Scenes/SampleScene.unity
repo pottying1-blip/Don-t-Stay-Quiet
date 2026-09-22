@@ -1260,7 +1260,6 @@ MonoBehaviour:
   isDead: 0
   isTalking: 0
   isMakingNoises: 0
-  hasAlert: 0
   awarenessRange: 0
   investPos: {x: 0, y: 0}
   suspicionLevel: 0
@@ -5182,6 +5181,7 @@ MonoBehaviour:
   possessSound: {fileID: 8300000, guid: d73e2cbfa76cfd74a8739a2ce7b60ab5, type: 3}
   isPossessed: 0
   isTalking: 0
+  isTakeDamage: 0
   currentBaseForm: {fileID: 4817761571909306170, guid: f8feb5008ee74414fb480512e27b7d18, type: 3}
 --- !u!212 &446136912
 SpriteRenderer:
@@ -5737,7 +5737,6 @@ MonoBehaviour:
   isDead: 0
   isTalking: 0
   isMakingNoises: 0
-  hasAlert: 0
   awarenessRange: 0
   investPos: {x: 0, y: 0}
   suspicionLevel: 0
@@ -6068,6 +6067,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CameraMovement
   player: {fileID: 446136913}
+  playerController: {fileID: 0}
+  shakeIntensity: 0.5
 --- !u!1 &573481720
 GameObject:
   m_ObjectHideFlags: 0
@@ -6357,7 +6358,6 @@ MonoBehaviour:
   isDead: 0
   isTalking: 0
   isMakingNoises: 0
-  hasAlert: 0
   awarenessRange: 5
   investPos: {x: 0, y: 0}
   suspicionLevel: 0
@@ -12473,7 +12473,6 @@ MonoBehaviour:
   isDead: 0
   isTalking: 0
   isMakingNoises: 0
-  hasAlert: 0
   awarenessRange: 0
   investPos: {x: 0, y: 0}
   suspicionLevel: 0

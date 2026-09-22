@@ -49,6 +49,7 @@ public class PlayerController : MonoBehaviour
     private bool actionTrigerred = false;
     public bool isPossessed = false;
     public bool isTalking = false;
+    public bool isTakeDamage = false;
     public Sprite currentBaseForm;
     void Awake()
     {
@@ -106,6 +107,14 @@ public class PlayerController : MonoBehaviour
             else rb2d.linearVelocity = moveInput*crouchSpeed;
         }
         else {rb2d.linearVelocity = Vector2.zero;}
+    }
+
+    public void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Bullet"))
+        {
+            isTakeDamage = true;
+        }
     }
 
     public void CheckInteraction()
