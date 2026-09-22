@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class HumanAlertState : HumanBaseState
@@ -12,10 +13,14 @@ public class HumanAlertState : HumanBaseState
         Transform closestAlert = FindClosestAlertButton(humanState.transform.position, humanState);
         if (closestAlert != null && !humanState.isDead)
         {
-            closestAlert.TryGetComponent<AlertReturn>(out var alertReturn);
-            humanState.SetDestination(closestAlert);
+            if (!humanState.gameManager.hasAlert && humanState.nPCData.nPCTypes == NPCTypes.Scientist)
+            {humanState.SetDestination(closestAlert);}
+            else if (humanState.gameManager.hasAlert && humanState.nPCData.nPCTypes == NPCTypes.Scientist)
+            {
+                humanState.StartCoroutine(HorrifiedShaking(humanState));
+            }   
 
-            if (!humanState.navMeshAgent.pathPending && humanState.navMeshAgent.remainingDistance <= humanState.navMeshAgent.stoppingDistance)
+            if (!humanState.gameManager.hasAlert && !humanState.navMeshAgent.pathPending && humanState.navMeshAgent.remainingDistance <= humanState.navMeshAgent.stoppingDistance)
             {
                 humanState.gameManager.WarningStart = true;
                 humanState.gameManager.hasAlert = true;
@@ -23,6 +28,7 @@ public class HumanAlertState : HumanBaseState
                 humanState.gameManager.currentAlert = closestAlert;
             }
         }
+
 
         if (humanState.nPCData.nPCTypes == NPCTypes.Soldier)
         {
@@ -36,6 +42,14 @@ public class HumanAlertState : HumanBaseState
                 humanState.SwitchState(humanState.humanScareState);
             }
         }
+    }
+
+    IEnumerator HorrifiedShaking(HumanStateManager humanState)
+    {
+        Vector2 shakingIntensity = Random.insideUnitCircle * 0.015f;
+        humanState.transform.position = (Vector2)humanState.transform.position + shakingIntensity;
+        yield return new WaitForSeconds(0.2f);
+        humanState.transform.position = (Vector2)humanState.transform.position;
     }
 
     public Transform FindClosestAlertButton(Vector2 selfPos, HumanStateManager humanState)

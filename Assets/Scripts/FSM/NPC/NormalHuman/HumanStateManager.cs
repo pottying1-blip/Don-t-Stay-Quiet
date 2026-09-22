@@ -26,7 +26,6 @@ public class HumanStateManager : MonoBehaviour
     public bool isDead = false;
     public bool isTalking = false;
     public bool isMakingNoises = false;
-    public bool hasAlert = false;
     public float awarenessRange;
     public Vector2 investPos;
     public float suspicionLevel;
