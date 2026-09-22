@@ -9,10 +9,10 @@ public class CameraMovement : MonoBehaviour
     public PlayerController playerController;
     public float shakeIntensity = 0.1f;
     private Vector3 newPos;
-    [SerializeField]private float frequency = 20f;
-    [SerializeField]private float maxOffset = 0.5f;
+    [SerializeField]private float frequency = 25f;
+    [SerializeField]private float maxOffset = 1f;
     [SerializeField]private float recoverSpeed = 1.5f;
-    [SerializeField]private float traumaExponent = 2.3f;
+    [SerializeField]private float traumaExponent = 1.75f;
     float trauma = 0f;
     float seed;
 
