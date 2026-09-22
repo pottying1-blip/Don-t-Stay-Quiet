@@ -6067,8 +6067,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CameraMovement
   player: {fileID: 446136913}
-  playerController: {fileID: 0}
-  shakeIntensity: 0.5
+  playerController: {fileID: 446136911}
+  shakeIntensity: 0.15
 --- !u!1 &573481720
 GameObject:
   m_ObjectHideFlags: 0

@@ -46,6 +46,7 @@ public class HumanAlertState : HumanBaseState
 
     IEnumerator HorrifiedShaking(HumanStateManager humanState)
     {
+        
         Vector2 shakingIntensity = Random.insideUnitCircle * 0.015f;
         humanState.transform.position = (Vector2)humanState.transform.position + shakingIntensity;
         yield return new WaitForSeconds(0.2f);
