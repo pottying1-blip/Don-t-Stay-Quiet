@@ -1,12 +1,26 @@
+using System;
 using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class CameraMovement : MonoBehaviour
 {
     public Transform player;
     public PlayerController playerController;
-    public float shakeIntensity = 0.5f;
+    public float shakeIntensity = 0.1f;
     private Vector3 newPos;
+    [SerializeField]private float frequency = 20f;
+    [SerializeField]private float maxOffset = 0.5f;
+    [SerializeField]private float recoverSpeed = 1.5f;
+    [SerializeField]private float traumaExponent = 2.3f;
+    float trauma = 0f;
+    float seed;
+
+    void Awake()
+    {
+        seed = UnityEngine.Random.value;
+    }
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -27,16 +41,16 @@ public class CameraMovement : MonoBehaviour
 
         if (playerController.isTakeDamage)
         {
-            StartCoroutine(ScreenShake());
+            trauma = Mathf.Clamp01(trauma + 0.4f); //chặn trên
+            playerController.isTakeDamage = false;
         }
+
+        float shake = Mathf.Pow(trauma, traumaExponent);
+        float offsetX = maxOffset * (Mathf.PerlinNoise(seed, Time.time * frequency)*2 - 1);
+        float offsetY = maxOffset * (Mathf.PerlinNoise(seed + 1f, Time.time * frequency)*2 - 1);
+
+        transform.position = newPos + new Vector3(offsetX, offsetY, 0)* shake;
+        trauma = Mathf.Max(0f, trauma - recoverSpeed * Time.deltaTime); //chặn dưới
     }
-    
-    IEnumerator ScreenShake()
-    {
-        Vector2 randomShake = Random.insideUnitCircle * shakeIntensity;
-        transform.position = newPos + (Vector3)randomShake;
-        yield return new WaitForSeconds(0.25f);
-        transform.position = newPos;
-        playerController.isTakeDamage =  false;
-    }
+
 }
