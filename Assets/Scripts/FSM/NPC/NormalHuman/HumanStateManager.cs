@@ -30,6 +30,7 @@ public class HumanStateManager : MonoBehaviour
     public bool hasTalked = false;
     public bool isReturningToPos = false;
     public bool isPursuing = false;
+    public bool isShaking = false;
     public float awarenessRange;
     public Vector2 investPos;
     public float suspicionLevel;
