@@ -14,14 +14,35 @@ public class HumanAlertState : HumanBaseState
         Transform closestAlert = FindClosestAlertButton(humanState.transform.position, humanState);
         if (closestAlert != null && !humanState.isDead)
         {
-            if (!humanState.gameManager.hasAlert && humanState.nPCData.nPCTypes == NPCTypes.Scientist)
-            {humanState.SetDestination(closestAlert);}
-
-            else if (humanState.gameManager.hasAlert && humanState.nPCData.nPCTypes == NPCTypes.Scientist)
+            if (humanState.nPCData.nPCTypes == NPCTypes.Scientist)
             {
-                humanState.StartCoroutine(HorrifiedShaking(humanState));
-            }   
+                if (!humanState.gameManager.hasAlert)
+                {
+                    humanState.SetDestination(closestAlert);
+                } else if (!humanState.isShaking) {humanState.StartCoroutine(ResetShake(humanState));}
 
+                if (humanState.gameManager.falseAlarm)
+                {
+                    humanState.gameManager.falseAlarm = false;
+                    humanState.isReturningToPos = true;
+                    humanState.StartCoroutine(WaitBeforePatrol());
+                    if (humanState.nPCData.canPatrol)
+                    {
+                        humanState.SetDestination(humanState.posA);
+                    } 
+                    else
+                    {humanState.SetDestination(humanState.stationaryPatrolPos);}
+                }
+
+                if (humanState.isReturningToPos 
+                && !humanState.navMeshAgent.pathPending 
+                && humanState.navMeshAgent.remainingDistance <= 0.1f)
+                {
+                    humanState.isReturningToPos = false;
+                    humanState.SwitchState(humanState.humanPatrolState);
+                }
+            }
+            
             if (!humanState.gameManager.hasAlert && humanState.nPCData.nPCTypes == NPCTypes.Scientist 
             && !humanState.navMeshAgent.pathPending 
             && humanState.navMeshAgent.remainingDistance <= humanState.navMeshAgent.stoppingDistance )
@@ -54,24 +75,18 @@ public class HumanAlertState : HumanBaseState
         yield return new WaitForSeconds(0.2f);
         humanState.transform.position = (Vector2)humanState.transform.position;
 
-        if (humanState.gameManager.falseAlarm)
-        {
-            humanState.isReturningToPos = true;
-            if (humanState.nPCData.canPatrol)
-            {
-                humanState.SetDestination(humanState.posA);
-            } 
-            else
-            {humanState.SetDestination(humanState.stationaryPatrolPos);}
-        }
+    }
 
-        if (humanState.isReturningToPos 
-        && !humanState.navMeshAgent.pathPending 
-        && humanState.navMeshAgent.remainingDistance <= 0.01f)
-        {
-            humanState.isReturningToPos = false;
-            humanState.SwitchState(humanState.humanPatrolState);
-        }
+    IEnumerator ResetShake(HumanStateManager humanState)
+    {
+        humanState.isShaking = true;
+        yield return humanState.StartCoroutine(HorrifiedShaking(humanState));
+        humanState.isShaking = false;
+    }
+
+    IEnumerator WaitBeforePatrol()
+    {
+        yield return new WaitForSecondsRealtime(2f);
     }
 
     public Transform FindClosestAlertButton(Vector2 selfPos, HumanStateManager humanState)
