@@ -8,7 +8,7 @@ public class HumanPatrolState : HumanBaseState
 
     public override void EnterState(HumanStateManager humanState)
     {
-        
+        Debug.Log("Patrolling");
     }
 
     public override void UpdateState(HumanStateManager humanState)

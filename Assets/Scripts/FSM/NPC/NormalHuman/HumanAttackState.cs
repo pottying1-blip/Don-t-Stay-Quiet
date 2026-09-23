@@ -8,6 +8,7 @@ public class HumanAttackState : HumanBaseState
     public override void EnterState(HumanStateManager humanState)
     {
         Debug.Log("QUAI VAT!");
+        humanState.isPursuing = true;
     }
 
     public override void UpdateState(HumanStateManager humanState)
@@ -24,19 +25,55 @@ public class HumanAttackState : HumanBaseState
         {
             humanState.transform.rotation = Quaternion.RotateTowards(humanState.transform.rotation,
             entityRotation, rotationSpeed*Time.deltaTime);
+
             if (Time.time >= humanState.lastSpawnTime + cooldownTime)
             {
-                GameObject bullet = Object.Instantiate<GameObject>(humanState.nPCData.bulletPrefab, humanState.transform.position,
-                humanState.transform.rotation);
-                if (bullet.TryGetComponent<Bullet>(out var bullets))
-                {
-                    bullets.Launch(direction, entityRotation);
-                    humanState.humanSoundSource.PlayOneShot(humanState.gunSound);
-                }
-                humanState.lastSpawnTime = Time.time;
-                
+                FiredBullet(humanState, direction, entityRotation);
             }
         }
+        if (humanState.isPursuing && humanState.playerController.isInvisible 
+        && humanState.playerController.currentState != humanState.playerController.disguisedState
+        || humanState.isPursuing && humanState.playerController.currentState == humanState.playerController.disguisedState)
+        {
+            humanState.onHoldAttackTimer += Time.deltaTime;
+            if (humanState.onHoldAttackTimer >= humanState.returnToPatrolTime)
+            {
+                humanState.gameManager.falseAlarm = true;
+                humanState.onHoldAttackTimer = 0f;
+                humanState.isPursuing = false;
+                humanState.isReturningToPos = true;
+                if (humanState.nPCData.canPatrol)
+                {
+                    humanState.SetDestination(humanState.posA);
+                } 
+                else
+                {humanState.SetDestination(humanState.stationaryPatrolPos);}
+            }
+        } 
+
+        if (humanState.isReturningToPos 
+        && !humanState.navMeshAgent.pathPending 
+        && humanState.navMeshAgent.remainingDistance <= 0.1f)
+        {
+            humanState.isReturningToPos = false;
+            humanState.gameManager.falseAlarm = true;
+            humanState.gameManager.hasAlert = false;
+
+            if (humanState.gameManager.currentAlert.TryGetComponent<AlertReturn>(out var button))
+            button.isResolved = true;
+            humanState.SwitchState(humanState.humanPatrolState);
+        }
+    }
+
+    void FiredBullet(HumanStateManager humanState, Vector2 direction, Quaternion entityRotation)
+    {
+        GameObject bullet = Object.Instantiate<GameObject>(humanState.nPCData.bulletPrefab, humanState.transform.position, humanState.transform.rotation);
+        if (bullet.TryGetComponent<Bullet>(out var bullets))
+        {
+            bullets.Launch(direction, entityRotation);
+            humanState.humanSoundSource.PlayOneShot(humanState.gunSound);
+        }
+        humanState.lastSpawnTime = Time.time;
     }
 
     public override void OnCollisionEnter(HumanStateManager humanState)

@@ -14,6 +14,7 @@ public class GameManager : MonoBehaviour
     public AudioSource gameAudioSource;
     public AudioClip warningSound;
     public bool hasPlayAlert = false;
+    public bool falseAlarm = false;
     void Awake()
     {
         Instance = this;

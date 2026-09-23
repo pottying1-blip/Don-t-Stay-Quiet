@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Runtime.InteropServices;
 using UnityEngine;
 
 public class HumanAlertState : HumanBaseState
@@ -15,12 +16,15 @@ public class HumanAlertState : HumanBaseState
         {
             if (!humanState.gameManager.hasAlert && humanState.nPCData.nPCTypes == NPCTypes.Scientist)
             {humanState.SetDestination(closestAlert);}
+
             else if (humanState.gameManager.hasAlert && humanState.nPCData.nPCTypes == NPCTypes.Scientist)
             {
                 humanState.StartCoroutine(HorrifiedShaking(humanState));
             }   
 
-            if (!humanState.gameManager.hasAlert && !humanState.navMeshAgent.pathPending && humanState.navMeshAgent.remainingDistance <= humanState.navMeshAgent.stoppingDistance)
+            if (!humanState.gameManager.hasAlert && humanState.nPCData.nPCTypes == NPCTypes.Scientist 
+            && !humanState.navMeshAgent.pathPending 
+            && humanState.navMeshAgent.remainingDistance <= humanState.navMeshAgent.stoppingDistance )
             {
                 humanState.gameManager.WarningStart = true;
                 humanState.gameManager.hasAlert = true;
@@ -30,27 +34,44 @@ public class HumanAlertState : HumanBaseState
         }
 
 
-        if (humanState.nPCData.nPCTypes == NPCTypes.Soldier)
+        if (humanState.nPCData.nPCTypes == NPCTypes.Soldier && humanState.gameManager.hasAlert)
         {
             float distance = UnityEngine.Vector2.Distance(humanState.transform.position, humanState.playerController.transform.position);
+            float currentDistance = Vector2.Distance(humanState.transform.position, humanState.gameManager.currentAlert.transform.position);
             humanState.SetDestination(humanState.gameManager.currentAlert);
-
-            float alertDistance = 5f;
-            if (humanState.playerController.isInvisible == false && distance < alertDistance 
-            && humanState.playerController.currentState != humanState.playerController.disguisedState)
+            
+            if (currentDistance < 3f)
             {
-                humanState.SwitchState(humanState.humanScareState);
+                humanState.SwitchState(humanState.humanAttackState);
             }
         }
     }
 
     IEnumerator HorrifiedShaking(HumanStateManager humanState)
     {
-        
         Vector2 shakingIntensity = Random.insideUnitCircle * 0.015f;
         humanState.transform.position = (Vector2)humanState.transform.position + shakingIntensity;
         yield return new WaitForSeconds(0.2f);
         humanState.transform.position = (Vector2)humanState.transform.position;
+
+        if (humanState.gameManager.falseAlarm)
+        {
+            humanState.isReturningToPos = true;
+            if (humanState.nPCData.canPatrol)
+            {
+                humanState.SetDestination(humanState.posA);
+            } 
+            else
+            {humanState.SetDestination(humanState.stationaryPatrolPos);}
+        }
+
+        if (humanState.isReturningToPos 
+        && !humanState.navMeshAgent.pathPending 
+        && humanState.navMeshAgent.remainingDistance <= 0.01f)
+        {
+            humanState.isReturningToPos = false;
+            humanState.SwitchState(humanState.humanPatrolState);
+        }
     }
 
     public Transform FindClosestAlertButton(Vector2 selfPos, HumanStateManager humanState)
@@ -60,6 +81,7 @@ public class HumanAlertState : HumanBaseState
 
         foreach (Transform alertButton in humanState.gameManager.allAlertButtons)
         {
+            if (alertButton.TryGetComponent<AlertReturn>(out var alertReturn) && alertReturn.isResolved) continue;
             float distance = Vector2.Distance(selfPos, alertButton.transform.position);
             if (distance < closestDistance)
             {
