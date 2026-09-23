@@ -717,10 +717,12 @@ GameObject:
   - component: {fileID: 349368034}
   - component: {fileID: 349368033}
   - component: {fileID: 349368038}
-  - component: {fileID: 349368037}
   - component: {fileID: 349368036}
   - component: {fileID: 349368039}
-  m_Layer: 0
+  - component: {fileID: 349368041}
+  - component: {fileID: 349368042}
+  - component: {fileID: 349368040}
+  m_Layer: 10
   m_Name: testSoldier02
   m_TagString: Soldier
   m_Icon: {fileID: 0}
@@ -859,19 +861,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7e39f6090724e4a4a8aadeb042afa2bc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: NavMeshPlus::NavMeshPlus.Extensions.AgentOverride2d
---- !u!114 &349368037
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 349368032}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bbbcf41740aeaaf43b4a70e47a1b58b8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::NavMeshMovement
-  targetPosTransform: {fileID: 1083501937}
 --- !u!195 &349368038
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -882,7 +871,7 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.75
-  m_Speed: 1
+  m_Speed: 3
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 120
@@ -907,6 +896,169 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: NavMeshPlus::NavMeshPlus.Extensions.AgentRotateSmooth2d
   angularSpeed: 500
+--- !u!82 &349368040
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 349368032}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_Resource: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+--- !u!114 &349368041
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 349368032}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 718c104b6907ed24e9d2e293214b9ceb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::HumanStateManager
+  posA: {x: 2.5, y: 2}
+  posB: {x: 2.5, y: -1}
+  stationaryPatrolPos: {x: 3.5, y: 16.774}
+  patrolSpeed: 0.1
+  playerController: {fileID: 446136911}
+  scareDistance: 2
+  humanSoundSource: {fileID: 349368040}
+  gaspSound: {fileID: 8300000, guid: 82b40dccfc75ff24083f67a1aef54b32, type: 3}
+  walkingSound: {fileID: 0}
+  fleshSound: {fileID: 8300000, guid: 19ff8486b5d96d348acfb887be3e64d6, type: 3}
+  gunSound: {fileID: 8300000, guid: b44eea666f78dfc4c9eb79fbe777d1bf, type: 3}
+  animator: {fileID: 349368042}
+  isDead: 0
+  isTalking: 0
+  isMakingNoises: 0
+  hasTalked: 0
+  isReturningToPos: 0
+  isPursuing: 0
+  awarenessRange: 0
+  investPos: {x: 0, y: 0}
+  suspicionLevel: 0
+  nPCData: {fileID: 11400000, guid: 0fa01ef5155905c43b63f58e90c16547, type: 2}
+  uIManager: {fileID: 847413725}
+  patrolElapsedTime: 0
+  soldierAttackDis: 4
+  lastSpawnTime: 0
+  wholeMapRadius: 50
+  returnToPatrolTime: 10
+  onHoldAttackTimer: 0
+  gameManager: {fileID: 811674057}
+  navMeshAgent: {fileID: 0}
+  emergentPlace: {fileID: 0}
+--- !u!95 &349368042
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 349368032}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 0}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &354103452
 GameObject:
   m_ObjectHideFlags: 0
@@ -1248,6 +1400,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::HumanStateManager
   posA: {x: 10.15, y: -2.45}
   posB: {x: 4.5, y: -2.45}
+  stationaryPatrolPos: {x: 0, y: 0}
   patrolSpeed: 0.1
   playerController: {fileID: 446136911}
   scareDistance: 3
@@ -1260,16 +1413,20 @@ MonoBehaviour:
   isDead: 0
   isTalking: 0
   isMakingNoises: 0
+  hasTalked: 0
+  isReturningToPos: 0
+  isPursuing: 0
   awarenessRange: 0
   investPos: {x: 0, y: 0}
   suspicionLevel: 0
   nPCData: {fileID: 11400000, guid: e58432befab9fea4f85359084537029e, type: 2}
   uIManager: {fileID: 847413725}
   patrolElapsedTime: 2
-  hasTalked: 0
   soldierAttackDis: 4
   lastSpawnTime: 0
   wholeMapRadius: 50
+  returnToPatrolTime: 10
+  onHoldAttackTimer: 0
   gameManager: {fileID: 811674057}
   navMeshAgent: {fileID: 0}
   emergentPlace: {fileID: 0}
@@ -5725,6 +5882,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::HumanStateManager
   posA: {x: 2.5, y: 2}
   posB: {x: 2.5, y: -1}
+  stationaryPatrolPos: {x: 0, y: 0}
   patrolSpeed: 0.1
   playerController: {fileID: 446136911}
   scareDistance: 3
@@ -5737,16 +5895,20 @@ MonoBehaviour:
   isDead: 0
   isTalking: 0
   isMakingNoises: 0
+  hasTalked: 0
+  isReturningToPos: 0
+  isPursuing: 0
   awarenessRange: 0
   investPos: {x: 0, y: 0}
   suspicionLevel: 0
   nPCData: {fileID: 11400000, guid: 1ba2e397e20fb494d94dae3e4eda016e, type: 2}
   uIManager: {fileID: 847413725}
   patrolElapsedTime: 0
-  hasTalked: 0
   soldierAttackDis: 4
   lastSpawnTime: 0
   wholeMapRadius: 50
+  returnToPatrolTime: 10
+  onHoldAttackTimer: 0
   gameManager: {fileID: 811674057}
   navMeshAgent: {fileID: 0}
   emergentPlace: {fileID: 0}
@@ -6350,6 +6512,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::HumanStateManager
   posA: {x: 2.5, y: 2}
   posB: {x: 2.5, y: -1}
+  stationaryPatrolPos: {x: 0.57, y: 17.38}
   patrolSpeed: 0.1
   playerController: {fileID: 446136911}
   scareDistance: 1.5
@@ -6362,16 +6525,20 @@ MonoBehaviour:
   isDead: 0
   isTalking: 0
   isMakingNoises: 0
+  hasTalked: 0
+  isReturningToPos: 0
+  isPursuing: 0
   awarenessRange: 5
   investPos: {x: 0, y: 0}
   suspicionLevel: 0
   nPCData: {fileID: 11400000, guid: 7755a46f63e06a048a078bafde049f69, type: 2}
   uIManager: {fileID: 847413725}
   patrolElapsedTime: 0
-  hasTalked: 0
   soldierAttackDis: 4
   lastSpawnTime: 0
   wholeMapRadius: 50
+  returnToPatrolTime: 10
+  onHoldAttackTimer: 0
   gameManager: {fileID: 811674057}
   navMeshAgent: {fileID: 0}
   emergentPlace: {fileID: 0}
@@ -11049,6 +11216,7 @@ MonoBehaviour:
   gameAudioSource: {fileID: 811674059}
   warningSound: {fileID: 8300000, guid: 1d84029be5af3634691784d4bee60c5d, type: 3}
   hasPlayAlert: 0
+  falseAlarm: 0
 --- !u!4 &811674058
 Transform:
   m_ObjectHideFlags: 0
@@ -11949,6 +12117,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b37f2791824ffa5468abc7dc3c2b3f8b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AlertReturn
+  isResolved: 0
 --- !u!1 &1272782246
 GameObject:
   m_ObjectHideFlags: 0
@@ -12262,6 +12431,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b37f2791824ffa5468abc7dc3c2b3f8b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AlertReturn
+  isResolved: 0
 --- !u!1 &1469124089
 GameObject:
   m_ObjectHideFlags: 0
@@ -12465,6 +12635,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::HumanStateManager
   posA: {x: 8.5, y: 4}
   posB: {x: 8.5, y: 1}
+  stationaryPatrolPos: {x: 0, y: 0}
   patrolSpeed: 0.35
   playerController: {fileID: 446136911}
   scareDistance: 2
@@ -12477,16 +12648,20 @@ MonoBehaviour:
   isDead: 0
   isTalking: 0
   isMakingNoises: 0
+  hasTalked: 0
+  isReturningToPos: 0
+  isPursuing: 0
   awarenessRange: 0
   investPos: {x: 0, y: 0}
   suspicionLevel: 0
   nPCData: {fileID: 11400000, guid: d13ddce2c18c8f848b980765505514bb, type: 2}
   uIManager: {fileID: 847413725}
   patrolElapsedTime: 0
-  hasTalked: 0
   soldierAttackDis: 4
   lastSpawnTime: 0
   wholeMapRadius: 50
+  returnToPatrolTime: 10
+  onHoldAttackTimer: 0
   gameManager: {fileID: 811674057}
   navMeshAgent: {fileID: 0}
   emergentPlace: {fileID: 0}
