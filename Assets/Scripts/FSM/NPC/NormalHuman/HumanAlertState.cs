@@ -16,7 +16,7 @@ public class HumanAlertState : HumanBaseState
         {
             if (humanState.nPCData.nPCTypes == NPCTypes.Scientist)
             {
-                if (!humanState.gameManager.hasAlert)
+                if (!humanState.gameManager.hasAlert && !humanState.isReturningToPos)
                 {
                     humanState.SetDestination(closestAlert);
                 } else if (!humanState.isShaking) {humanState.StartCoroutine(ResetShake(humanState));}
@@ -34,18 +34,20 @@ public class HumanAlertState : HumanBaseState
                     {humanState.SetDestination(humanState.stationaryPatrolPos);}
                 }
 
-                if (humanState.isReturningToPos 
+                if (humanState.isReturningToPos && humanState.gameManager.hasAlert 
                 && !humanState.navMeshAgent.pathPending 
                 && humanState.navMeshAgent.remainingDistance <= 0.1f)
                 {
                     humanState.isReturningToPos = false;
                     humanState.SwitchState(humanState.humanPatrolState);
+                    humanState.gameManager.WarningStart = false;
+                    humanState.gameManager.hasAlert = false;
                 }
             }
             
             if (!humanState.gameManager.hasAlert && humanState.nPCData.nPCTypes == NPCTypes.Scientist 
             && !humanState.navMeshAgent.pathPending 
-            && humanState.navMeshAgent.remainingDistance <= humanState.navMeshAgent.stoppingDistance )
+            && humanState.navMeshAgent.remainingDistance <= humanState.navMeshAgent.stoppingDistance)
             {
                 humanState.gameManager.WarningStart = true;
                 humanState.gameManager.hasAlert = true;

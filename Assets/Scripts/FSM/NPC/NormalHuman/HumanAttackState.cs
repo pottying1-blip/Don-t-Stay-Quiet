@@ -56,7 +56,7 @@ public class HumanAttackState : HumanBaseState
         && humanState.navMeshAgent.remainingDistance <= 0.1f)
         {
             humanState.isReturningToPos = false;
-            humanState.gameManager.falseAlarm = true;
+            humanState.gameManager.falseAlarm = false;
             humanState.gameManager.hasAlert = false;
 
             if (humanState.gameManager.currentAlert.TryGetComponent<AlertReturn>(out var button))

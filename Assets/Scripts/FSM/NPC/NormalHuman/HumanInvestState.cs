@@ -14,7 +14,7 @@ public class HumanInvestState : HumanBaseState
         
         humanState.SetDestination(humanState.investPos);
 
-        if ((Vector2)humanState.transform.position == humanState.investPos)
+        if ((Vector2)humanPos == humanState.investPos)
         {
             Debug.Log("He has came to the position!");
         }
