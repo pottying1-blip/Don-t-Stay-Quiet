@@ -45,8 +45,10 @@ public class HumanStateManager : MonoBehaviour
     public GameManager gameManager;
     public NavMeshAgent navMeshAgent;
     public Transform emergentPlace;
+    public Vector2 humanPosition;
     void Start()
     {
+        humanPosition = transform.position;
         navMeshAgent = GetComponent<NavMeshAgent>();
         humanCurrentState = humanPatrolState;
         humanCurrentState.EnterState(this);
