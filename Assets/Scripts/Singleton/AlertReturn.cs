@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class AlertReturn : MonoBehaviour
@@ -12,11 +13,15 @@ public class AlertReturn : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if (isResolved)
+        {
+            StartCoroutine(ReturnState());
+        }
     }
 
-    public Vector2 ReturnAlertButtonPos()
+    IEnumerator ReturnState()
     {
-        return this.transform.position;
+        yield return new WaitForSecondsRealtime(6f);
+        isResolved = false;
     }
 }

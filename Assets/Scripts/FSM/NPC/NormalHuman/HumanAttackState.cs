@@ -58,6 +58,7 @@ public class HumanAttackState : HumanBaseState
             humanState.isReturningToPos = false;
             humanState.gameManager.falseAlarm = false;
             humanState.gameManager.hasAlert = false;
+            humanState.gameManager.hasPlayAlert = false;
 
             if (humanState.gameManager.currentAlert.TryGetComponent<AlertReturn>(out var button))
             button.isResolved = true;
