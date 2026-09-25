@@ -159,8 +159,10 @@ public class PlayerController : MonoBehaviour
                 HandleKillInput(target, distance, targetCollider);
                 HandleConsumeGuidance(target, distance);
             }
+            
         }
         HandleConsumeInput();
+        
     }
 
     void HandleKillInput(HumanStateManager target, float distance, Collider2D targetCollider)
@@ -193,18 +195,27 @@ public class PlayerController : MonoBehaviour
 
     void HandleConsumeInput()
     {
-        if (Input.GetKey(KeyCode.Q) && hasShownConsumeGuidance && humanStateManager != null)
+        Collider2D[] surrounds = Physics2D.OverlapCircleAll(playerPosition, pierceDistance, npcLayer);
+        HumanStateManager deadTarget = FindClosestDeadTarget(surrounds);
+        if (deadTarget != null)
+        {
+            humanStateManager = deadTarget;
+        }
+
+        if (Input.GetKey(KeyCode.Q) && hasShownConsumeGuidance && deadTarget != null && deadTarget.isDead)
         {
             holdTime+= Time.deltaTime;
             if (holdTime >= timerQPress && !actionTrigerred)
             {
                 Possess();
+                actionTrigerred = true;
             }
         }
 
         if (Input.GetKeyUp(KeyCode.Q))
         {
-            if (!actionTrigerred && hasShownConsumeGuidance && humanStateManager != null && holdTime < timerQPress)
+            if (!actionTrigerred && hasShownConsumeGuidance && holdTime < timerQPress
+            && deadTarget != null && deadTarget.isDead )
             {
                 Consume();
             }
@@ -235,6 +246,25 @@ public class PlayerController : MonoBehaviour
                 {
                     closestDist = d;
                     closest = hsm;
+                }
+            }
+        }
+        return closest;
+    }
+
+    HumanStateManager FindClosestDeadTarget(Collider2D[] candidates)
+    {
+        HumanStateManager closest = null;
+        float closestDist = float.MaxValue;
+        foreach (Collider2D thing in candidates)
+        {
+            if (thing.TryGetComponent<HumanStateManager>(out var hsm) && hsm.isDead)
+            {
+                float d = Vector2.Distance(playerPosition, hsm.transform.position);
+                if (d < closestDist)
+                { 
+                    closestDist = d;
+                    closest = hsm; 
                 }
             }
         }

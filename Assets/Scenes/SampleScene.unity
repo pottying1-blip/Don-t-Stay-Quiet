@@ -1023,6 +1023,7 @@ MonoBehaviour:
   hasTalked: 0
   isReturningToPos: 0
   isPursuing: 0
+  isShaking: 0
   awarenessRange: 0
   investPos: {x: 0, y: 0}
   suspicionLevel: 0
@@ -1037,6 +1038,7 @@ MonoBehaviour:
   gameManager: {fileID: 811674057}
   navMeshAgent: {fileID: 0}
   emergentPlace: {fileID: 0}
+  humanPosition: {x: 0, y: 0}
 --- !u!95 &349368042
 Animator:
   serializedVersion: 7
@@ -1416,6 +1418,7 @@ MonoBehaviour:
   hasTalked: 0
   isReturningToPos: 0
   isPursuing: 0
+  isShaking: 0
   awarenessRange: 0
   investPos: {x: 0, y: 0}
   suspicionLevel: 0
@@ -1430,6 +1433,7 @@ MonoBehaviour:
   gameManager: {fileID: 811674057}
   navMeshAgent: {fileID: 0}
   emergentPlace: {fileID: 0}
+  humanPosition: {x: 0, y: 0}
 --- !u!212 &359021303
 SpriteRenderer:
   serializedVersion: 2
@@ -5898,6 +5902,7 @@ MonoBehaviour:
   hasTalked: 0
   isReturningToPos: 0
   isPursuing: 0
+  isShaking: 0
   awarenessRange: 0
   investPos: {x: 0, y: 0}
   suspicionLevel: 0
@@ -5912,6 +5917,7 @@ MonoBehaviour:
   gameManager: {fileID: 811674057}
   navMeshAgent: {fileID: 0}
   emergentPlace: {fileID: 0}
+  humanPosition: {x: 0, y: 0}
 --- !u!95 &477207854
 Animator:
   serializedVersion: 7
@@ -6528,6 +6534,7 @@ MonoBehaviour:
   hasTalked: 0
   isReturningToPos: 0
   isPursuing: 0
+  isShaking: 0
   awarenessRange: 5
   investPos: {x: 0, y: 0}
   suspicionLevel: 0
@@ -6542,6 +6549,7 @@ MonoBehaviour:
   gameManager: {fileID: 811674057}
   navMeshAgent: {fileID: 0}
   emergentPlace: {fileID: 0}
+  humanPosition: {x: 0, y: 0}
 --- !u!114 &573481727
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12451,7 +12459,7 @@ GameObject:
   - component: {fileID: 1469124096}
   m_Layer: 8
   m_Name: Human 2
-  m_TagString: Untagged
+  m_TagString: Scientist
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -12651,6 +12659,7 @@ MonoBehaviour:
   hasTalked: 0
   isReturningToPos: 0
   isPursuing: 0
+  isShaking: 0
   awarenessRange: 0
   investPos: {x: 0, y: 0}
   suspicionLevel: 0
@@ -12665,6 +12674,7 @@ MonoBehaviour:
   gameManager: {fileID: 811674057}
   navMeshAgent: {fileID: 0}
   emergentPlace: {fileID: 0}
+  humanPosition: {x: 0, y: 0}
 --- !u!212 &1469124094
 SpriteRenderer:
   serializedVersion: 2
