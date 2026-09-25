@@ -18,7 +18,8 @@ MonoBehaviour:
   moveSpeed: 3
   awarenessRadius: 4
   canAttack: 0
-  canPatrol: 1
+  bulletPrefab: {fileID: 0}
+  canPatrol: 0
   possessTime: 25
   dialogueEntries:
   - question: Hey, are you okay? You look really bad
