@@ -6,7 +6,7 @@ public class DeathEvent : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        
+        TriggerExplosionDeath();
     }
 
     public void TriggerExplosionDeath()

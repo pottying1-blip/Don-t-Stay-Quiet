@@ -6,7 +6,6 @@ public class NPCData : ScriptableObject
 {
     public Sprite portrait;
     public NPCTypes nPCTypes;
-    public DeathCause deathCause;
     public string nPCName;
     public float moveSpeed;
     public float awarenessRadius;

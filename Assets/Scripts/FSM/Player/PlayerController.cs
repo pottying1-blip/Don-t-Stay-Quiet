@@ -32,6 +32,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField]private LayerMask interactableLayer;
     [SerializeField]private LayerMask npcLayer;
     [SerializeField]private GameObject consumeGuidanceCanvas;
+    [SerializeField]private GameObject consumeGuidanceNoPossessCanvas;
     public bool hasShownConsumeGuidance = false;
     private InteractableObject interactableObject;
     private float throwAngle;
@@ -172,6 +173,7 @@ public class PlayerController : MonoBehaviour
         {
             transform.position = humanPos + new Vector2(1f, 0f);
             targetSprite = target.GetComponent<SpriteRenderer>().sprite;
+            target.deathCause = DeathCause.Pierced;
             target.Die();
             targetCollider.isTrigger = true;
             humanStateManager = target; 
@@ -180,16 +182,34 @@ public class PlayerController : MonoBehaviour
 
     void HandleConsumeGuidance(HumanStateManager target, float distance)
     {
-        if (!consumeGuidanceCanvas.activeSelf && target.isDead && distance < pierceDistance)
+        if (target.deathCause == DeathCause.Pierced)
         {
-            consumeGuidanceCanvas.SetActive(true);
-            hasShownConsumeGuidance = true;
-        }
+            if (!consumeGuidanceCanvas.activeSelf && target.isDead && distance < pierceDistance)
+            {
+                consumeGuidanceCanvas.SetActive(true);
+                hasShownConsumeGuidance = true;
+            }
 
-        if (hasShownConsumeGuidance && distance > pierceDistance)
+            if (hasShownConsumeGuidance && distance > pierceDistance)
+            {
+                consumeGuidanceCanvas.SetActive(false);
+                hasShownConsumeGuidance = false;
+            }
+        }
+        
+        if (target.deathCause == DeathCause.Explosion)
         {
-            consumeGuidanceCanvas.SetActive(false);
-            hasShownConsumeGuidance = false;
+            if (!consumeGuidanceNoPossessCanvas.activeSelf && target.isDead && distance < pierceDistance)
+            {
+                consumeGuidanceNoPossessCanvas.SetActive(true);
+                hasShownConsumeGuidance = true;
+            }
+
+            if (hasShownConsumeGuidance && distance > pierceDistance)
+            {
+                consumeGuidanceNoPossessCanvas.SetActive(false);
+                hasShownConsumeGuidance = false;
+            }
         }
     }
 

@@ -15,6 +15,7 @@ public class GameManager : MonoBehaviour
     public AudioClip warningSound;
     public bool hasPlayAlert = false;
     public bool falseAlarm = false;
+    
     void Awake()
     {
         Instance = this;
@@ -22,7 +23,7 @@ public class GameManager : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        
+    
     }
 
     // Update is called once per frame

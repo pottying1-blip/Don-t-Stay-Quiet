@@ -9,6 +9,7 @@ public class HumanPatrolState : HumanBaseState
     public override void EnterState(HumanStateManager humanState)
     {
         Debug.Log("Patrolling");
+        
     }
 
     public override void UpdateState(HumanStateManager humanState)
@@ -20,7 +21,7 @@ public class HumanPatrolState : HumanBaseState
                 humanState.animator.SetBool("isCanPatrol", false);
             }
             else humanState.animator.SetBool("isCanPatrol", true);
-            
+
             humanState.patrolElapsedTime += Time.deltaTime;
 
             float distance = UnityEngine.Vector2.Distance(humanState.transform.position, 
