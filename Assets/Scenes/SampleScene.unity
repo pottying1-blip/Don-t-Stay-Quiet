@@ -5263,7 +5263,7 @@ Transform:
   m_GameObject: {fileID: 446136910}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -5.02, y: -2.51, z: 0}
+  m_LocalPosition: {x: -7.19, y: -2.51, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 5.418421}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -5671,7 +5671,7 @@ Transform:
   m_GameObject: {fileID: 477207849}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.83, y: -2.17, z: 0}
+  m_LocalPosition: {x: -3.42, y: -2.17, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -9757,6 +9757,7 @@ GameObject:
   - component: {fileID: 811674058}
   - component: {fileID: 811674057}
   - component: {fileID: 811674059}
+  - component: {fileID: 811674060}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -9900,6 +9901,19 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &811674060
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 811674056}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9e1962633b8f24c4c9dc2aaadb320270, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::DeathEvent
+  humanStateManager: {fileID: 477207853}
 --- !u!1 &847413724
 GameObject:
   m_ObjectHideFlags: 0

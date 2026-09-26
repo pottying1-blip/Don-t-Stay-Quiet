@@ -11,7 +11,7 @@ public class HumanStateManager : MonoBehaviour
     public HumanDeadState humanDeadState = new HumanDeadState();
     public HumanTalkingState humanTalkingState = new HumanTalkingState();
     public HumanAlertState humanAlertState = new HumanAlertState();
-    public DeathCause deathCause = DeathCause.Pierced;
+    public DeathCause deathCause;
     public HumanAttackState humanAttackState = new HumanAttackState();
     public UnityEngine.Vector2 posA = new UnityEngine.Vector2(2.5f, 2f);
     public UnityEngine.Vector2 posB = new UnityEngine.Vector2(2.5f, -1f);
