@@ -5738,7 +5738,7 @@ MonoBehaviour:
   deathCause: 0
   posA: {x: -0.83, y: -2.17}
   posB: {x: 8.55, y: -2.17}
-  stationaryPatrolPos: {x: 0, y: 0}
+  stationaryPatrolPos: {x: -0.83, y: -2.17}
   patrolSpeed: 0.1
   playerController: {fileID: 446136911}
   scareDistance: 3
