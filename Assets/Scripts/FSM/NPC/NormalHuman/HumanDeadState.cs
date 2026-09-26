@@ -6,8 +6,18 @@ public class HumanDeadState : HumanBaseState
     {
         humanState.humanSoundSource.PlayOneShot(humanState.fleshSound);
         humanState.animator.SetBool("isScared", false);
-        humanState.animator.SetBool("isDead", true);
-        humanState.isDead = true;
+
+        switch (humanState.deathCause)
+        {
+            case DeathCause.Pierced:
+                humanState.animator.SetBool("isDead", true);
+                humanState.isDead = true;
+                break;
+            case DeathCause.Explosion:
+                humanState.isDead = true;
+                break;
+        }
+        
     }
 
     public override void UpdateState(HumanStateManager humanState)

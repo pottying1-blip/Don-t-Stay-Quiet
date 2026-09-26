@@ -12,34 +12,38 @@ public class HumanPatrolState : HumanBaseState
     }
 
     public override void UpdateState(HumanStateManager humanState)
-    {   
-        humanState.patrolElapsedTime += Time.deltaTime;
-
-        float distance = UnityEngine.Vector2.Distance(humanState.transform.position, 
-        humanState.playerController.transform.position);
-
-        if (humanState.playerController.isInvisible == false && distance < humanState.scareDistance
-         && humanState.playerController.currentState != humanState.playerController.disguisedState)
+    {
+        if (!humanState.isDead)
         {
-            humanState.SwitchState(humanState.humanScareState);
-        }
-        else 
-        {
-            HandlePatrol(humanState);
-        }
+            humanState.patrolElapsedTime += Time.deltaTime;
 
-        if (humanState.gameManager.hasAlert && humanState.nPCData.nPCTypes == NPCTypes.Soldier)
-        {
-            humanState.SwitchState(humanState.humanAlertState);
-        }
+            float distance = UnityEngine.Vector2.Distance(humanState.transform.position, 
+            humanState.playerController.transform.position);
 
-        if (humanState.playerController.isInvisible == false && distance < humanState.scareDistance 
-        && humanState.playerController.currentState == humanState.playerController.disguisedState && !humanState.playerController.isTalking)
-        {
-            humanState.SwitchState(humanState.humanTalkingState);
-        }
+            if (humanState.playerController.isInvisible == false && distance < humanState.scareDistance
+            && humanState.playerController.currentState != humanState.playerController.disguisedState)
+            {
+                humanState.SwitchState(humanState.humanScareState);
+            }
+            else 
+            {
+                HandlePatrol(humanState);
+            }
 
-        CheckNoiseInvestigation(humanState);
+            if (humanState.gameManager.hasAlert && humanState.nPCData.nPCTypes == NPCTypes.Soldier)
+            {
+                humanState.SwitchState(humanState.humanAlertState);
+            }
+
+            if (humanState.playerController.isInvisible == false && distance < humanState.scareDistance 
+            && humanState.playerController.currentState == humanState.playerController.disguisedState && !humanState.playerController.isTalking)
+            {
+                humanState.SwitchState(humanState.humanTalkingState);
+            }
+
+            CheckNoiseInvestigation(humanState);
+        }
+        else {humanState.Die();}
     }
 
     void CheckNoiseInvestigation(HumanStateManager humanState)
