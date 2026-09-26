@@ -10,10 +10,11 @@ public class HumanDeadState : HumanBaseState
         switch (humanState.deathCause)
         {
             case DeathCause.Pierced:
-                humanState.animator.SetBool("isDead", true);
+                humanState.animator.SetBool("isDeadByPierced", true);
                 humanState.isDead = true;
                 break;
             case DeathCause.Explosion:
+                humanState.animator.SetBool("isDeadByExplosion", true);
                 humanState.isDead = true;
                 break;
         }
